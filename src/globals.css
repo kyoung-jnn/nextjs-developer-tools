@@ -1,0 +1,136 @@
+@import "tailwindcss";
+
+@theme {
+  /* DevTools dark theme colors */
+  --color-devtools-bg-primary: #202124;
+  --color-devtools-bg-secondary: #292a2d;
+  --color-devtools-bg-tertiary: #35363a;
+  --color-devtools-bg-hover: #3c4043;
+  --color-devtools-bg-selected: #394457;
+  --color-devtools-text-primary: #e8eaed;
+  --color-devtools-text-secondary: #9aa0a6;
+  --color-devtools-text-muted: #5f6368;
+  --color-devtools-border: #3c4043;
+  --color-devtools-accent-blue: #8ab4f8;
+  --color-devtools-accent-purple: #c58af9;
+  --color-devtools-accent-green: #81c995;
+  --color-devtools-accent-orange: #fcad70;
+  --color-devtools-accent-red: #f28b82;
+
+  /* Font families */
+  --font-mono: "Menlo", "Monaco", "Consolas", monospace;
+  --font-sans: "Segoe UI", "Roboto", "Helvetica Neue", sans-serif;
+
+  /* Font sizes */
+  --text-2xs: 10px;
+  --text-xs: 11px;
+  --text-sm: 12px;
+}
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    color: var(--color-devtools-text-primary);
+    background: var(--color-devtools-bg-primary);
+    overflow: hidden;
+  }
+
+  /* Scrollbar Styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-devtools-bg-primary);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-devtools-bg-tertiary);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-devtools-bg-hover);
+  }
+}
+
+@layer components {
+  /* Type badges */
+  .type-ssr {
+    background: color-mix(
+      in srgb,
+      var(--color-devtools-accent-green) 20%,
+      transparent
+    );
+    color: var(--color-devtools-accent-green);
+  }
+
+  .type-ssg {
+    background: color-mix(
+      in srgb,
+      var(--color-devtools-accent-blue) 20%,
+      transparent
+    );
+    color: var(--color-devtools-accent-blue);
+  }
+
+  .type-isr {
+    background: color-mix(
+      in srgb,
+      var(--color-devtools-accent-orange) 20%,
+      transparent
+    );
+    color: var(--color-devtools-accent-orange);
+  }
+
+  .type-rsc {
+    background: color-mix(
+      in srgb,
+      var(--color-devtools-accent-purple) 20%,
+      transparent
+    );
+    color: var(--color-devtools-accent-purple);
+  }
+
+  .type-client {
+    background: color-mix(
+      in srgb,
+      var(--color-devtools-text-secondary) 20%,
+      transparent
+    );
+    color: var(--color-devtools-text-secondary);
+  }
+
+  .type-pageprops {
+    background: color-mix(
+      in srgb,
+      var(--color-devtools-accent-blue) 20%,
+      transparent
+    );
+    color: var(--color-devtools-accent-blue);
+  }
+
+  /* Loading spinner animation */
+  .loading-spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid var(--color-devtools-border);
+    border-top-color: var(--color-devtools-accent-blue);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
