@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Next.js Payload</title>
+  </head>
+  <body>
+    <div id="app" class="flex flex-col h-screen">
+      <!-- Header with filter bar -->
+      <header class="shrink-0 border-b border-devtools-border">
+        <div id="filter-bar">
+          <!-- FilterBar component will be mounted here -->
+        </div>
+      </header>
+
+      <!-- Main content area with split panes -->
+      <main class="flex-1 flex overflow-hidden">
+        <!-- Left pane: Payload list -->
+        <section
+          class="flex-1 min-w-[300px] overflow-hidden border-r border-devtools-border relative"
+        >
+          <div id="payload-list">
+            <!-- PayloadList component will be mounted here -->
+          </div>
+        </section>
+
+        <!-- Right pane: Detail panel -->
+        <section class="flex-1 min-w-[300px] overflow-hidden">
+          <div id="detail-panel">
+            <!-- DetailPanel component will be mounted here -->
+          </div>
+        </section>
+      </main>
+
+      <!-- Status bar -->
+      <footer class="shrink-0 border-t border-devtools-border">
+        <div
+          id="status-bar"
+          class="px-3 py-1 bg-devtools-bg-secondary text-xs text-devtools-text-secondary"
+        >
+          <span class="status-text">Ready</span>
+        </div>
+      </footer>
+    </div>
+
+    <script type="module" src="./panel.ts"></script>
+  </body>
+</html>
