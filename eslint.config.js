@@ -1,10 +1,10 @@
+import { defineConfig } from "eslint/config";
 import eslint from "@eslint/js";
 import tseslint from "typescript-eslint";
 import globals from "globals";
 import eslintConfigPrettier from "eslint-config-prettier";
 
-/** @type {import('eslint').Linter.Config[]} */
-export default [
+export default defineConfig([
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
   eslintConfigPrettier,
@@ -39,4 +39,4 @@ export default [
   {
     ignores: ["dist/**", "node_modules/**", "*.config.js", "*.config.ts"],
   },
-];
+]);
