@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "Next.js Developer Tools",
+  "version": "1.0.0",
+  "description": "Detect Next.js router type and view SSR payloads in Chrome DevTools",
+  "icons": {
+    "16": "assets/icons/icon16.png",
+    "48": "assets/icons/icon48.png",
+    "128": "assets/icons/icon128.png"
+  },
+  "action": {
+    "default_icon": {
+      "16": "assets/icons/icon16.png",
+      "48": "assets/icons/icon48.png"
+    },
+    "default_title": "Next.js Developer Tools"
+  },
+  "background": {
+    "service_worker": "background/index.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content/index.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "devtools_page": "devtools/devtools.html",
+  "permissions": ["storage", "activeTab", "scripting"],
+  "host_permissions": ["<all_urls>"],
+  "minimum_chrome_version": "88"
+}
