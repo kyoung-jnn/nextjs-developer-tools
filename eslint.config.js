@@ -8,12 +8,12 @@ export default defineConfig([
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
   eslintConfigPrettier,
+  // Base configuration for all files
   {
     languageOptions: {
       globals: {
         ...globals.browser,
         ...globals.es2021,
-        chrome: "readonly",
       },
       parserOptions: {
         ecmaVersion: "latest",
@@ -21,8 +21,9 @@ export default defineConfig([
       },
     },
   },
+  // TypeScript files - shared rules
   {
-    files: ["**/*.ts"],
+    files: ["**/*.ts", "**/*.tsx"],
     rules: {
       "@typescript-eslint/no-unused-vars": [
         "error",
@@ -36,7 +37,34 @@ export default defineConfig([
       "no-console": ["warn", { allow: ["log", "warn", "error", "info"] }],
     },
   },
+  // Extension package - Chrome API globals
   {
-    ignores: ["dist/**", "node_modules/**", "*.config.js", "*.config.ts"],
+    files: ["packages/extension/**/*.ts"],
+    languageOptions: {
+      globals: {
+        chrome: "readonly",
+      },
+    },
+  },
+  // Playground package - React/Next.js specific
+  {
+    files: ["packages/playground/**/*.tsx"],
+    languageOptions: {
+      globals: {
+        React: "readonly",
+      },
+    },
+  },
+  // Ignore patterns
+  {
+    ignores: [
+      "dist/**",
+      "node_modules/**",
+      "*.config.js",
+      "*.config.ts",
+      "packages/*/dist/**",
+      "packages/*/.next/**",
+      "packages/*/node_modules/**",
+    ],
   },
 ]);

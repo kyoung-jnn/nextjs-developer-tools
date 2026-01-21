@@ -5,6 +5,8 @@ node_modules/
 dist/
 build/
 *.js.map
+packages/*/dist/
+packages/*/.next/
 
 # IDE
 .vscode/
