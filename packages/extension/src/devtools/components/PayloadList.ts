@@ -5,7 +5,9 @@
  */
 
 import type { PayloadEntry } from "@/shared/types";
-import { formatBytes } from "@/shared/parser";
+import { escapeHtml } from "@/shared/utils";
+import { formatTimestamp, formatBytes } from "@/shared/formatters";
+import { getBadgeClassName, BADGE_CONFIG } from "@/shared/constants";
 
 // Virtual scrolling constants
 const ROW_HEIGHT = 32; // pixels per row
@@ -21,12 +23,23 @@ export class PayloadList {
   private visibleStartIndex = 0;
   private visibleEndIndex = 0;
   private scrollContainer: HTMLElement | null = null;
+  private abortController: AbortController | null = null;
 
   constructor(container: HTMLElement, onSelect: (index: number) => void) {
     this.container = container;
     this.onSelect = onSelect;
 
     this.render();
+  }
+
+  /**
+   * Cleanup and destroy component
+   */
+  destroy(): void {
+    this.abortController?.abort();
+    this.abortController = null;
+    this.scrollContainer = null;
+    this.container.innerHTML = "";
   }
 
   /**
@@ -55,24 +68,29 @@ export class PayloadList {
    * Render the table structure
    */
   private render(): void {
+    // 기존 리스너 정리
+    this.abortController?.abort();
+    this.abortController = new AbortController();
+    const { signal } = this.abortController;
+
     this.container.innerHTML = `
-      <div class="payload-scroll-container h-full overflow-auto relative">
+      <div class="payload-scroll-container h-full overflow-auto relative" role="grid" aria-label="Payload entries">
         <table class="table table-xs table-pin-rows w-full">
-          <thead>
-            <tr class="bg-base-200">
-              <th class="w-[40%] max-w-[200px]">Name</th>
-              <th class="w-[60px]">Type</th>
-              <th class="w-[70px] text-right">Size</th>
-              <th class="w-[60px] text-right">Time</th>
+          <thead role="rowgroup">
+            <tr class="bg-base-200" role="row">
+              <th class="w-[40%] max-w-[200px]" role="columnheader" scope="col">Name</th>
+              <th class="w-[60px]" role="columnheader" scope="col">Type</th>
+              <th class="w-[70px] text-right" role="columnheader" scope="col">Size</th>
+              <th class="w-[60px] text-right" role="columnheader" scope="col">Time</th>
             </tr>
           </thead>
-          <tbody class="payload-tbody">
+          <tbody class="payload-tbody" role="rowgroup">
           </tbody>
         </table>
-        <div class="virtual-spacer-top w-full pointer-events-none"></div>
-        <div class="virtual-spacer-bottom w-full pointer-events-none"></div>
+        <div class="virtual-spacer-top w-full pointer-events-none" aria-hidden="true"></div>
+        <div class="virtual-spacer-bottom w-full pointer-events-none" aria-hidden="true"></div>
       </div>
-      <div class="empty-state hidden">
+      <div class="empty-state hidden" role="status" aria-live="polite">
         <div class="flex flex-col items-center justify-center h-[200px] text-base-content/50">
           <p>No SSR payload detected</p>
           <p class="text-xs opacity-60 mt-1">Navigate to a Next.js page to see SSR data</p>
@@ -87,7 +105,8 @@ export class PayloadList {
     if (this.scrollContainer) {
       this.scrollContainer.addEventListener(
         "scroll",
-        this.handleScroll.bind(this)
+        this.handleScroll.bind(this),
+        { signal }
       );
     }
   }
@@ -125,44 +144,54 @@ export class PayloadList {
   }
 
   /**
+   * Get accessible description for payload type
+   */
+  private getTypeDescription(type: string): string {
+    const config = BADGE_CONFIG[type as keyof typeof BADGE_CONFIG];
+    return config?.description ?? `${type} payload data`;
+  }
+
+  /**
    * Render a single entry row
    */
   private renderEntry(entry: PayloadEntry, index: number): string {
     const isSelected = index === this.selectedIndex;
-    const badgeClass = this.getBadgeClass(entry.type);
+    const badgeClass = getBadgeClassName(entry.type);
+    const typeLabel =
+      BADGE_CONFIG[entry.type as keyof typeof BADGE_CONFIG]?.label ??
+      entry.type;
+    const typeDescription = this.getTypeDescription(entry.type);
 
     return `
-      <tr class="payload-row cursor-pointer hover ${isSelected ? "bg-primary/20" : ""}" data-index="${index}">
-        <td class="w-[40%] max-w-[200px] truncate" title="${this.escapeHtml(entry.name)}">
-          ${this.escapeHtml(entry.name)}
+      <tr
+        class="payload-row cursor-pointer hover ${isSelected ? "bg-primary/20" : ""}"
+        data-index="${index}"
+        role="row"
+        tabindex="${isSelected ? "0" : "-1"}"
+        aria-selected="${isSelected}"
+        aria-label="${escapeHtml(entry.name)}, ${typeLabel} payload, ${formatBytes(entry.size)}"
+      >
+        <td class="w-[40%] max-w-[200px] truncate" title="${escapeHtml(entry.name)}" role="gridcell">
+          ${escapeHtml(entry.name)}
         </td>
-        <td class="w-[60px]">
-          <span class="badge badge-sm ${badgeClass}">${entry.type}</span>
+        <td class="w-[60px]" role="gridcell">
+          <span
+            class="badge badge-sm ${badgeClass}"
+            aria-label="${typeLabel}"
+            title="${typeDescription}"
+          >
+            <span aria-hidden="true">${typeLabel}</span>
+            <span class="sr-only">${typeDescription}</span>
+          </span>
         </td>
-        <td class="w-[70px] text-right font-mono">${formatBytes(entry.size)}</td>
-        <td class="w-[60px] text-right font-mono">${this.formatTimestamp(entry.timestamp)}</td>
+        <td class="w-[70px] text-right font-mono" role="gridcell" aria-label="${formatBytes(entry.size)}">
+          ${formatBytes(entry.size)}
+        </td>
+        <td class="w-[60px] text-right font-mono" role="gridcell" aria-label="${formatTimestamp(entry.timestamp, "full")}">
+          ${formatTimestamp(entry.timestamp, "time")}
+        </td>
       </tr>
     `;
-  }
-
-  /**
-   * Get badge class based on payload type
-   */
-  private getBadgeClass(type: string): string {
-    switch (type.toLowerCase()) {
-      case "rsc":
-        return "badge-secondary";
-      case "pageprops":
-        return "badge-primary";
-      case "ssr":
-        return "badge-success";
-      case "ssg":
-        return "badge-info";
-      case "isr":
-        return "badge-warning";
-      default:
-        return "badge-ghost";
-    }
   }
 
   /**
@@ -175,37 +204,24 @@ export class PayloadList {
   }
 
   /**
-   * Update selection styling
+   * Update selection styling and ARIA attributes
    */
   private updateSelection(): void {
     const rows = this.container.querySelectorAll(".payload-row");
-    rows.forEach((row, index) => {
-      if (index === this.selectedIndex) {
+    rows.forEach((row) => {
+      const rowElement = row as HTMLElement;
+      const rowIndex = parseInt(rowElement.dataset.index || "-1", 10);
+      const isSelected = rowIndex === this.selectedIndex;
+
+      if (isSelected) {
         row.classList.add("bg-primary/20");
+        rowElement.setAttribute("aria-selected", "true");
+        rowElement.setAttribute("tabindex", "0");
       } else {
         row.classList.remove("bg-primary/20");
+        rowElement.setAttribute("aria-selected", "false");
+        rowElement.setAttribute("tabindex", "-1");
       }
-    });
-  }
-
-  /**
-   * Escape HTML to prevent XSS
-   */
-  private escapeHtml(text: string): string {
-    const div = document.createElement("div");
-    div.textContent = text;
-    return div.innerHTML;
-  }
-
-  /**
-   * Format timestamp for display
-   */
-  private formatTimestamp(timestamp: number): string {
-    const date = new Date(timestamp);
-    return date.toLocaleTimeString(undefined, {
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
     });
   }
 
