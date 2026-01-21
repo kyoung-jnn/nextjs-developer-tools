@@ -10,6 +10,7 @@ export class FilterBar {
   private container: HTMLElement;
   private onChange: (filter: FilterState) => void;
   private currentFilter: FilterState;
+  private abortController: AbortController | null = null;
 
   constructor(container: HTMLElement, onChange: (filter: FilterState) => void) {
     this.container = container;
@@ -22,6 +23,15 @@ export class FilterBar {
     };
 
     this.render();
+  }
+
+  /**
+   * Cleanup and destroy component
+   */
+  destroy(): void {
+    this.abortController?.abort();
+    this.abortController = null;
+    this.container.innerHTML = "";
   }
 
   /**
@@ -77,14 +87,23 @@ export class FilterBar {
    * Attach event listeners
    */
   private attachEventListeners(): void {
+    // 기존 리스너 정리
+    this.abortController?.abort();
+    this.abortController = new AbortController();
+    const { signal } = this.abortController;
+
     // Type filter buttons
     const filterButtons = this.container.querySelectorAll(".filter-btn");
     filterButtons.forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        const target = e.target as HTMLElement;
-        const filter = target.dataset.filter ?? "all";
-        this.handleTypeFilterChange(filter);
-      });
+      btn.addEventListener(
+        "click",
+        (e) => {
+          const target = e.target as HTMLElement;
+          const filter = target.dataset.filter ?? "all";
+          this.handleTypeFilterChange(filter);
+        },
+        { signal }
+      );
     });
 
     // Search input
@@ -92,10 +111,14 @@ export class FilterBar {
       ".search-input"
     ) as HTMLInputElement;
     if (searchInput) {
-      searchInput.addEventListener("input", (e) => {
-        const target = e.target as HTMLInputElement;
-        this.handleSearchChange(target.value);
-      });
+      searchInput.addEventListener(
+        "input",
+        (e) => {
+          const target = e.target as HTMLInputElement;
+          this.handleSearchChange(target.value);
+        },
+        { signal }
+      );
     }
 
     // Sort select
@@ -103,18 +126,26 @@ export class FilterBar {
       ".sort-select"
     ) as HTMLSelectElement;
     if (sortSelect) {
-      sortSelect.addEventListener("change", (e) => {
-        const target = e.target as HTMLSelectElement;
-        this.handleSortFieldChange(target.value as SortField);
-      });
+      sortSelect.addEventListener(
+        "change",
+        (e) => {
+          const target = e.target as HTMLSelectElement;
+          this.handleSortFieldChange(target.value as SortField);
+        },
+        { signal }
+      );
     }
 
     // Sort order button
     const sortOrderBtn = this.container.querySelector(".sort-order-btn");
     if (sortOrderBtn) {
-      sortOrderBtn.addEventListener("click", () => {
-        this.handleSortOrderToggle();
-      });
+      sortOrderBtn.addEventListener(
+        "click",
+        () => {
+          this.handleSortOrderToggle();
+        },
+        { signal }
+      );
     }
   }
 

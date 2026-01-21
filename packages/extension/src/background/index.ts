@@ -12,7 +12,6 @@ import {
   createRequestDetectionMessage,
   ErrorCodes,
   type PageStateResponse,
-  type PageStateUpdatedMessage,
   type RouterDetectedMessage,
   type PayloadExtractedMessage,
 } from "@/shared/messages";
@@ -21,20 +20,38 @@ import {
   getOrCreateTabState,
   deleteTabState,
   updatePageState,
-  setDevToolsConnected,
   cleanupClosedTabs,
 } from "./state";
 import { updateBadge, clearBadge } from "./badge";
+import { getPortManager } from "./port-manager";
+import { getPersistentStateManager } from "./persistent-state";
 import { type PageState, type DetectionResult } from "@/shared/types";
 
-// Store connected DevTools ports for broadcasting updates
-const connectedPorts = new Map<number, chrome.runtime.Port>();
+// =============================================================================
+// Constants
+// =============================================================================
+
+/** 정리 작업 알람 이름 */
+const CLEANUP_ALARM_NAME = "ndt-cleanup";
+
+/** 정리 주기 (분) */
+const CLEANUP_INTERVAL_MINUTES = 5;
 
 /**
  * Initialize the background script
  */
-const initialize = (): void => {
+const initialize = async (): Promise<void> => {
   console.log("[Next.js DevTools] Background script initialized");
+
+  // 영구 상태 복원
+  const persistentState = getPersistentStateManager();
+  await persistentState.initialize();
+
+  // PortManager 설정
+  const portManager = getPortManager();
+  portManager.setOnDisconnect((tabId) => {
+    console.log(`[Next.js DevTools] DevTools disconnected for tab ${tabId}`);
+  });
 
   // Listen for messages from content scripts
   chrome.runtime.onMessage.addListener(handleMessage);
@@ -51,16 +68,52 @@ const initialize = (): void => {
   // Listen for tab removal
   chrome.tabs.onRemoved.addListener(handleTabRemoved);
 
+  // Listen for alarms (정리 작업)
+  chrome.alarms.onAlarm.addListener(handleAlarm);
+
+  // Service Worker 종료 전 상태 저장
+  chrome.runtime.onSuspend?.addListener(handleSuspend);
+
+  // Set up periodic cleanup alarm
+  await setupCleanupAlarm();
+
   // Run initial cleanup
   runPeriodicCleanup().catch(console.error);
+};
 
-  // Set up periodic cleanup (every 5 minutes)
-  setInterval(
-    () => {
-      runPeriodicCleanup().catch(console.error);
-    },
-    5 * 60 * 1000
+/**
+ * Service Worker 종료 전 핸들러
+ */
+const handleSuspend = (): void => {
+  console.log("[Next.js DevTools] Service worker suspending, saving state...");
+  const persistentState = getPersistentStateManager();
+  persistentState.saveBeforeSuspend().catch(console.error);
+};
+
+/**
+ * 정리 알람 설정
+ */
+const setupCleanupAlarm = async (): Promise<void> => {
+  // 기존 알람 삭제
+  await chrome.alarms.clear(CLEANUP_ALARM_NAME);
+
+  // 새 알람 생성 (5분마다)
+  chrome.alarms.create(CLEANUP_ALARM_NAME, {
+    periodInMinutes: CLEANUP_INTERVAL_MINUTES,
+  });
+
+  console.log(
+    `[Next.js DevTools] Cleanup alarm set for every ${CLEANUP_INTERVAL_MINUTES} minutes`
   );
+};
+
+/**
+ * 알람 핸들러
+ */
+const handleAlarm = (alarm: chrome.alarms.Alarm): void => {
+  if (alarm.name === CLEANUP_ALARM_NAME) {
+    runPeriodicCleanup().catch(console.error);
+  }
 };
 
 /**
@@ -228,36 +281,18 @@ const handleGetPageState = async (
 /**
  * Handle DevTools panel connection
  */
-const handleConnection = (port: chrome.runtime.Port): void => {
-  if (port.name.startsWith("devtools-")) {
-    const tabId = parseInt(port.name.replace("devtools-", ""), 10);
+const handleConnection = async (port: chrome.runtime.Port): Promise<void> => {
+  const portManager = getPortManager();
+  const tabId = await portManager.handleConnect(port);
 
-    if (!isNaN(tabId)) {
-      connectedPorts.set(tabId, port);
-      console.log(`[Next.js DevTools] DevTools connected for tab ${tabId}`);
+  if (tabId !== null) {
+    console.log(`[Next.js DevTools] DevTools connected for tab ${tabId}`);
 
-      // Mark DevTools as connected in tab state
-      setDevToolsConnected(tabId, true).catch(console.error);
-
-      port.onDisconnect.addListener(() => {
-        connectedPorts.delete(tabId);
-        setDevToolsConnected(tabId, false).catch(console.error);
-        console.log(
-          `[Next.js DevTools] DevTools disconnected for tab ${tabId}`
-        );
-      });
-
-      // Send current state immediately
-      getTabState(tabId).then((tabState) => {
-        const pageState = tabState?.pageState;
-        if (pageState) {
-          const message: PageStateUpdatedMessage = {
-            type: MessageTypes.PAGE_STATE_UPDATED,
-            payload: pageState,
-          };
-          port.postMessage(message);
-        }
-      });
+    // Send current state immediately
+    const tabState = await getTabState(tabId);
+    const pageState = tabState?.pageState;
+    if (pageState) {
+      portManager.broadcastPageState(tabId, pageState);
     }
   }
 };
@@ -266,14 +301,8 @@ const handleConnection = (port: chrome.runtime.Port): void => {
  * Broadcast page state update to connected DevTools
  */
 const broadcastPageStateUpdate = (tabId: number, state: PageState): void => {
-  const port = connectedPorts.get(tabId);
-  if (port) {
-    const message: PageStateUpdatedMessage = {
-      type: MessageTypes.PAGE_STATE_UPDATED,
-      payload: state,
-    };
-    port.postMessage(message);
-  }
+  const portManager = getPortManager();
+  portManager.broadcastPageState(tabId, state);
 };
 
 /**
@@ -317,7 +346,11 @@ const handleTabUpdated = async (
 const handleTabRemoved = async (tabId: number): Promise<void> => {
   // Remove state for closed tab
   await deleteTabState(tabId);
-  connectedPorts.delete(tabId);
+
+  // PortManager에서 포트 연결 해제
+  const portManager = getPortManager();
+  portManager.disconnect(tabId);
+
   console.log(`[Next.js DevTools] Tab ${tabId} removed, state cleaned up`);
 };
 
