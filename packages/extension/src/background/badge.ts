@@ -44,54 +44,6 @@ const ICON_PATHS = {
 // =============================================================================
 
 /**
- * 특정 탭의 배지 텍스트 업데이트
- */
-export const updateBadgeText = async (
-  tabId: number,
-  text: string
-): Promise<void> => {
-  try {
-    await chrome.action.setBadgeText({
-      tabId,
-      text,
-    });
-  } catch (error) {
-    // 탭이 닫혔거나 유효하지 않을 수 있음
-    console.warn(
-      `[Next.js DevTools] Failed to update badge text for tab ${tabId}:`,
-      error
-    );
-  }
-};
-
-/**
- * 특정 탭의 배지 색상 업데이트
- */
-export const updateBadgeColor = async (
-  tabId: number,
-  color: string
-): Promise<void> => {
-  try {
-    // 배경 색상 설정
-    await chrome.action.setBadgeBackgroundColor({
-      tabId,
-      color,
-    });
-
-    // 텍스트 색상 (가독성을 위해 흰색)
-    await chrome.action.setBadgeTextColor({
-      tabId,
-      color: "#ffffff",
-    });
-  } catch (error) {
-    console.warn(
-      `[Next.js DevTools] Failed to update badge color for tab ${tabId}:`,
-      error
-    );
-  }
-};
-
-/**
  * 라우터 타입에 따른 배지 스타일 적용
  * App Router: 파란색 "App"
  * Page Router: 보라색 "Page"
@@ -186,29 +138,6 @@ export const clearBadge = async (tabId: number): Promise<void> => {
   }
 };
 
-/**
- * 현재 활성 탭의 배지 업데이트
- */
-export const updateBadgeForActiveTab = async (
-  routerType: RouterType
-): Promise<void> => {
-  try {
-    const [activeTab] = await chrome.tabs.query({
-      active: true,
-      currentWindow: true,
-    });
-
-    if (activeTab?.id) {
-      await updateBadge(activeTab.id, routerType);
-    }
-  } catch (error) {
-    console.warn(
-      "[Next.js DevTools] Failed to update badge for active tab:",
-      error
-    );
-  }
-};
-
 // =============================================================================
 // Helper Functions
 // =============================================================================
@@ -226,11 +155,4 @@ const getIconTitle = (routerType: RouterType): string => {
     default:
       return "Next.js Developer Tools";
   }
-};
-
-/**
- * 배지 설정 조회
- */
-export const getBadgeConfig = (routerType: RouterType) => {
-  return BADGE_CONFIG[routerType];
 };

@@ -5,7 +5,9 @@
  */
 
 import type { PayloadEntry } from "@/shared/types";
-import { formatBytes } from "@/shared/parser";
+import { escapeHtml } from "@/shared/utils";
+import { formatTimestamp, formatBytes } from "@/shared/formatters";
+import { getBadgeClassName } from "@/shared/constants";
 import { JsonTree } from "./JsonTree";
 
 type TabType = "headers" | "payload" | "preview";
@@ -14,10 +16,20 @@ export class DetailPanel {
   private container: HTMLElement;
   private currentEntry: PayloadEntry | null = null;
   private currentTab: TabType = "preview";
+  private abortController: AbortController | null = null;
 
   constructor(container: HTMLElement) {
     this.container = container;
     this.render();
+  }
+
+  /**
+   * Cleanup and destroy component
+   */
+  destroy(): void {
+    this.abortController?.abort();
+    this.abortController = null;
+    this.container.innerHTML = "";
   }
 
   /**
@@ -57,13 +69,22 @@ export class DetailPanel {
    * Attach event listeners
    */
   private attachEventListeners(): void {
+    // 기존 리스너 정리
+    this.abortController?.abort();
+    this.abortController = new AbortController();
+    const { signal } = this.abortController;
+
     const tabs = this.container.querySelectorAll(".detail-tab");
     tabs.forEach((tab) => {
-      tab.addEventListener("click", (e) => {
-        const target = e.target as HTMLElement;
-        const tabType = target.dataset.tab as TabType;
-        this.handleTabChange(tabType);
-      });
+      tab.addEventListener(
+        "click",
+        (e) => {
+          const target = e.target as HTMLElement;
+          const tabType = target.dataset.tab as TabType;
+          this.handleTabChange(tabType);
+        },
+        { signal }
+      );
     });
   }
 
@@ -127,7 +148,7 @@ export class DetailPanel {
     if (!this.currentEntry) return;
 
     const entry = this.currentEntry;
-    const badgeClass = this.getBadgeClass(entry.type);
+    const badgeClass = getBadgeClassName(entry.type);
 
     content.innerHTML = `
       <div class="text-sm">
@@ -137,7 +158,7 @@ export class DetailPanel {
             <tbody>
               <tr>
                 <td class="text-base-content/60 w-24">Name</td>
-                <td class="font-medium">${this.escapeHtml(entry.name)}</td>
+                <td class="font-medium">${escapeHtml(entry.name)}</td>
               </tr>
               <tr>
                 <td class="text-base-content/60">Type</td>
@@ -149,41 +170,13 @@ export class DetailPanel {
               </tr>
               <tr>
                 <td class="text-base-content/60">Extracted At</td>
-                <td class="font-mono">${this.formatTimestamp(entry.timestamp)}</td>
+                <td class="font-mono">${formatTimestamp(entry.timestamp, "full")}</td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
     `;
-  }
-
-  /**
-   * Get badge class based on payload type
-   */
-  private getBadgeClass(type: string): string {
-    switch (type.toLowerCase()) {
-      case "rsc":
-        return "badge-secondary";
-      case "pageprops":
-        return "badge-primary";
-      case "ssr":
-        return "badge-success";
-      case "ssg":
-        return "badge-info";
-      case "isr":
-        return "badge-warning";
-      default:
-        return "badge-ghost";
-    }
-  }
-
-  /**
-   * Format timestamp for display
-   */
-  private formatTimestamp(timestamp: number): string {
-    const date = new Date(timestamp);
-    return date.toLocaleString();
   }
 
   /**
@@ -197,7 +190,7 @@ export class DetailPanel {
     content.innerHTML = `
       <div class="relative">
         <div class="mockup-code bg-base-200 text-xs max-h-[calc(100vh-200px)] overflow-auto">
-          <pre class="px-4"><code>${this.escapeHtml(jsonString)}</code></pre>
+          <pre class="px-4"><code>${escapeHtml(jsonString)}</code></pre>
         </div>
         <button class="copy-btn btn btn-xs btn-ghost absolute top-2 right-2" title="Copy to clipboard">
           Copy
@@ -233,14 +226,5 @@ export class DetailPanel {
     if (treeContainer) {
       new JsonTree(treeContainer as HTMLElement, this.currentEntry.data);
     }
-  }
-
-  /**
-   * Escape HTML to prevent XSS
-   */
-  private escapeHtml(text: string): string {
-    const div = document.createElement("div");
-    div.textContent = text;
-    return div.innerHTML;
   }
 }

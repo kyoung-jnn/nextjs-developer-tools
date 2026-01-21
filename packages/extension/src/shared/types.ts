@@ -241,3 +241,45 @@ export const createDefaultTabState = (tabId: number): TabState => ({
  * UUID v4 생성
  */
 export const generateUUID = (): string => crypto.randomUUID();
+
+/**
+ * PageState 생성 with partial overrides
+ */
+export const createPageState = (
+  overrides: Partial<PageState> = {}
+): PageState => ({
+  url: "",
+  routerType: "none",
+  isNextJs: false,
+  payloads: [],
+  detection: createDefaultDetection(),
+  lastUpdated: Date.now(),
+  ...overrides,
+});
+
+/**
+ * PayloadEntry 생성 with partial overrides
+ */
+export const createPayloadEntry = (
+  overrides: Partial<PayloadEntry> &
+    Pick<PayloadEntry, "name" | "type" | "data" | "raw">
+): PayloadEntry => ({
+  id: generateUUID(),
+  size: new Blob([overrides.raw]).size,
+  timestamp: Date.now(),
+  ...overrides,
+});
+
+/**
+ * TabState 생성 with partial overrides
+ */
+export const createTabState = (
+  tabId: number,
+  overrides: Partial<Omit<TabState, "tabId">> = {}
+): TabState => ({
+  tabId,
+  pageState: null,
+  devtoolsConnected: false,
+  lastActivity: Date.now(),
+  ...overrides,
+});

@@ -5,6 +5,11 @@
 
 import type { PayloadEntry, PayloadType, FilterState } from "./types";
 import { generateUUID } from "./types";
+import { safeJsonParse } from "./utils";
+import { getBadgeClassName } from "./constants";
+
+// Re-export for backward compatibility
+export { formatBytes } from "./formatters";
 
 // =============================================================================
 // Utility Functions
@@ -14,30 +19,6 @@ import { generateUUID } from "./types";
  * 문자열의 바이트 크기 계산
  */
 export const calculateSize = (data: string): number => new Blob([data]).size;
-
-/**
- * 바이트를 읽기 좋은 형식으로 변환
- */
-export const formatBytes = (bytes: number): string => {
-  if (bytes === 0) return "0 B";
-
-  const units = ["B", "KB", "MB", "GB"];
-  const k = 1024;
-  const i = Math.floor(Math.log(bytes) / Math.log(k));
-
-  return `${parseFloat((bytes / Math.pow(k, i)).toFixed(1))} ${units[i]}`;
-};
-
-/**
- * 안전한 JSON 파싱
- */
-export const safeParseJSON = <T = unknown>(jsonString: string): T | null => {
-  try {
-    return JSON.parse(jsonString) as T;
-  } catch {
-    return null;
-  }
-};
 
 // =============================================================================
 // Page Router Parsing
@@ -57,7 +38,7 @@ export const extractNextData = (): string | null => {
 export const parsePageRouterPayload = (
   rawData: string
 ): PayloadEntry | null => {
-  const parsed = safeParseJSON<Record<string, unknown>>(rawData);
+  const parsed = safeJsonParse<Record<string, unknown>>(rawData);
   if (!parsed) return null;
 
   const page = (parsed.page as string) || "/";
@@ -117,7 +98,7 @@ export const parseAppRouterPayload = (chunks: string[]): PayloadEntry[] => {
     const match = chunk.match(RSC_CHUNK_PATTERN);
     if (match) {
       const [, index, data] = match;
-      const parsed = safeParseJSON(data);
+      const parsed = safeJsonParse(data);
 
       entries.push({
         id: generateUUID(),
@@ -153,7 +134,7 @@ export const parseAppRouterPayload = (chunks: string[]): PayloadEntry[] => {
  * 빌드 정보 추출 (Page Router)
  */
 export const extractBuildInfo = (rawData: string): PayloadEntry | null => {
-  const parsed = safeParseJSON<Record<string, unknown>>(rawData);
+  const parsed = safeJsonParse<Record<string, unknown>>(rawData);
   if (!parsed) return null;
 
   const buildId = parsed.buildId as string | undefined;
@@ -276,18 +257,8 @@ export const getPayloadTypeLabel = (type: PayloadType): string => {
 
 /**
  * PayloadType에 따른 배지 색상 클래스
+ * @deprecated Use getBadgeClassName from constants.ts instead
  */
 export const getPayloadTypeBadgeClass = (type: PayloadType): string => {
-  switch (type) {
-    case "pageProps":
-      return "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300";
-    case "rsc":
-      return "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300";
-    case "metadata":
-      return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300";
-    case "buildInfo":
-      return "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300";
-    default:
-      return "bg-gray-100 text-gray-800";
-  }
+  return getBadgeClassName(type);
 };
