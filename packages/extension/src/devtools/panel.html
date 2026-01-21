@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payload</title>
+  </head>
+  <body class="bg-base-100">
+    <div id="app" class="flex h-screen flex-col">
+      <!-- Header with filter bar -->
+      <header
+        class="navbar bg-base-200 border-base-300 min-h-0 border-b px-2 py-1"
+      >
+        <div id="filter-bar" class="w-full">
+          <!-- FilterBar component will be mounted here -->
+        </div>
+      </header>
+
+      <!-- Main content area with split panes -->
+      <main class="flex flex-1 overflow-hidden">
+        <!-- Left pane: Payload list -->
+        <section
+          class="border-base-300 relative min-w-[300px] flex-1 overflow-hidden border-r"
+        >
+          <div id="payload-list" class="h-full">
+            <!-- PayloadList component will be mounted here -->
+          </div>
+        </section>
+
+        <!-- Right pane: Detail panel -->
+        <section class="min-w-[300px] flex-1 overflow-hidden">
+          <div id="detail-panel" class="h-full">
+            <!-- DetailPanel component will be mounted here -->
+          </div>
+        </section>
+      </main>
+
+      <!-- Status bar -->
+      <footer class="bg-base-200 border-base-300 border-t px-3 py-1">
+        <div id="status-bar" class="text-base-content/60 text-xs">
+          <span class="status-text">Ready</span>
+        </div>
+      </footer>
+    </div>
+
+    <script type="module" src="./panel.ts"></script>
+  </body>
+</html>

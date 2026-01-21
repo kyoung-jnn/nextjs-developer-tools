@@ -1,0 +1,19 @@
+{
+  "name": "@nextjs-devtools/extension",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src/"
+  },
+  "devDependencies": {
+    "@crxjs/vite-plugin": "^2.3.0",
+    "@types/chrome": "^0.0.268",
+    "daisyui": "^5.5.14",
+    "sharp": "^0.34.5",
+    "vite": "^5.2.0"
+  }
+}
