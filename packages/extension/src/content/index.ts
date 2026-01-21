@@ -4,25 +4,34 @@
  */
 
 import { detectRouterWithRetry, mightBeNextJs } from "./detector";
+import {
+  getContentStore,
+  setDetected,
+  setLastDetection,
+  updateCurrentUrl,
+  setObserverActive,
+  incrementCheckCount,
+  resetForNavigation,
+} from "./content-state";
 import type { DetectionResult, PayloadEntry } from "@/shared/types";
 import {
   createRouterDetectedMessage,
   createPayloadExtractedMessage,
   isRequestDetectionMessage,
 } from "@/shared/messages";
+import { safeJsonParse } from "@/shared/utils";
+import { createDebouncedObserver } from "@/shared/observer";
+import { PERFORMANCE } from "@/shared/constants";
 
 // =============================================================================
-// State
+// Non-State References (Observer/Timer는 상태가 아닌 리소스 참조)
 // =============================================================================
 
-/** 현재 페이지에서 감지 완료 여부 */
-let hasDetected = false;
+/** URL 변경 감시 Observer (리소스 참조) */
+let urlObserver: MutationObserver | null = null;
 
-/** 현재 URL (SPA 네비게이션 감지용) */
-let currentUrl = window.location.href;
-
-/** 마지막 감지 결과 */
-let _lastDetection: DetectionResult | null = null;
+/** 주기적 체크 인터벌 ID (리소스 참조) */
+let checkIntervalId: ReturnType<typeof setInterval> | null = null;
 
 // =============================================================================
 // Initialization
@@ -34,6 +43,9 @@ let _lastDetection: DetectionResult | null = null;
 const initialize = (): void => {
   console.log("[Next.js DevTools] Content script loaded");
 
+  // 초기 URL 설정
+  updateCurrentUrl(window.location.href);
+
   // Background Script로부터 메시지 수신
   chrome.runtime.onMessage.addListener(handleMessage);
 
@@ -42,6 +54,34 @@ const initialize = (): void => {
 
   // SPA 네비게이션 감시
   observeUrlChanges();
+
+  // 페이지 언로드 시 정리
+  setupCleanup();
+};
+
+/**
+ * 페이지 언로드 시 리소스 정리
+ */
+const setupCleanup = (): void => {
+  const cleanup = (): void => {
+    // Observer 정리
+    if (urlObserver) {
+      urlObserver.disconnect();
+      urlObserver = null;
+      setObserverActive(false);
+    }
+
+    // 인터벌 정리
+    if (checkIntervalId !== null) {
+      clearInterval(checkIntervalId);
+      checkIntervalId = null;
+    }
+
+    console.log("[Next.js DevTools] Cleanup completed");
+  };
+
+  window.addEventListener("beforeunload", cleanup);
+  window.addEventListener("pagehide", cleanup);
 };
 
 // =============================================================================
@@ -58,7 +98,7 @@ const handleMessage = (
 ): boolean => {
   if (isRequestDetectionMessage(message)) {
     // 감지 재요청 시 재실행
-    hasDetected = false;
+    setDetected(false);
     runDetection();
     sendResponse({ success: true });
   }
@@ -74,8 +114,10 @@ const handleMessage = (
  * 라우터 감지 실행 및 결과를 Background Script로 전송
  */
 const runDetection = async (): Promise<void> => {
+  const state = getContentStore().getState();
+
   // 중복 감지 방지
-  if (hasDetected) {
+  if (state.hasDetected) {
     return;
   }
 
@@ -87,17 +129,17 @@ const runDetection = async (): Promise<void> => {
       detectedAt: Date.now(),
       indicators: ["Quick pre-check: Not Next.js"],
     });
-    hasDetected = true;
+    setDetected(true);
     return;
   }
 
   try {
     // 재시도 로직이 포함된 감지 실행
     const result = await detectRouterWithRetry(3, 300);
-    _lastDetection = result;
+    setLastDetection(result);
 
     sendDetectionResult(result);
-    hasDetected = true;
+    setDetected(true);
 
     console.log(
       `[Next.js DevTools] Detected: ${result.routerType} (confidence: ${result.confidence}%)`,
@@ -161,7 +203,7 @@ const extractAndSendPayload = async (
           type: "pageProps",
           size: new Blob([rawData]).size,
           timestamp: Date.now(),
-          data: safeParseJSON(rawData),
+          data: safeJsonParse(rawData),
           raw: rawData,
         });
       }
@@ -226,17 +268,6 @@ const extractRSCChunksFromDOM = (): string[] => {
   return chunks;
 };
 
-/**
- * 안전한 JSON 파싱
- */
-const safeParseJSON = (str: string): unknown => {
-  try {
-    return JSON.parse(str);
-  } catch {
-    return str;
-  }
-};
-
 // =============================================================================
 // SPA Navigation Detection
 // =============================================================================
@@ -245,15 +276,28 @@ const safeParseJSON = (str: string): unknown => {
  * SPA 네비게이션을 위한 URL 변경 감시
  */
 const observeUrlChanges = (): void => {
-  // MutationObserver로 DOM 변경 감지
-  const observer = new MutationObserver(() => {
-    checkUrlChange();
+  // 디바운싱이 적용된 MutationObserver로 DOM 변경 감지
+  // 100ms 디바운스로 CPU 사용률 감소
+  urlObserver = createDebouncedObserver(
+    () => {
+      checkUrlChange();
+    },
+    {
+      debounceMs: PERFORMANCE.MUTATION_DEBOUNCE_MS,
+      useIdleCallback: true,
+    }
+  );
+
+  // head 요소만 관찰하여 subtree 범위 최소화
+  // Next.js SPA 네비게이션은 주로 head의 title/meta 변경으로 감지 가능
+  const targetNode = document.head || document.documentElement;
+  urlObserver.observe(targetNode, {
+    childList: true,
+    subtree: false, // subtree 최소화로 성능 향상
+    characterData: true,
   });
 
-  observer.observe(document.documentElement, {
-    childList: true,
-    subtree: true,
-  });
+  setObserverActive(true);
 
   // popstate 이벤트 (브라우저 뒤로/앞으로)
   window.addEventListener("popstate", () => {
@@ -263,15 +307,15 @@ const observeUrlChanges = (): void => {
   // pushState/replaceState 인터셉트
   interceptHistoryMethods();
 
-  // 초기 로드 후 주기적 체크 (폴백)
-  let checkCount = 0;
+  // 초기 로드 후 주기적 체크 (폴백) - 10회까지만
   const maxChecks = 10;
-  const checkInterval = setInterval(() => {
-    checkCount++;
+  checkIntervalId = setInterval(() => {
+    const count = incrementCheckCount();
     checkUrlChange();
 
-    if (checkCount >= maxChecks) {
-      clearInterval(checkInterval);
+    if (count >= maxChecks && checkIntervalId !== null) {
+      clearInterval(checkIntervalId);
+      checkIntervalId = null;
     }
   }, 500);
 };
@@ -280,15 +324,18 @@ const observeUrlChanges = (): void => {
  * URL 변경 확인 및 재감지 트리거
  */
 const checkUrlChange = (): void => {
-  if (window.location.href !== currentUrl) {
+  const state = getContentStore().getState();
+
+  if (window.location.href !== state.currentUrl) {
     console.log(
       "[Next.js DevTools] URL changed:",
-      currentUrl,
+      state.currentUrl,
       "->",
       window.location.href
     );
-    currentUrl = window.location.href;
-    hasDetected = false;
+
+    // 네비게이션에 따른 상태 리셋
+    resetForNavigation(window.location.href);
 
     // 페이지가 안정화될 때까지 약간 대기
     setTimeout(() => {

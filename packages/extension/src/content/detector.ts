@@ -66,18 +66,14 @@ export const detectAppRouter = (): DetectionResult | null => {
   let confidence = 0;
 
   // 1. script 태그에서 self.__next_f.push 패턴 확인
-  const scripts = document.querySelectorAll("script");
-  let rscScriptCount = 0;
-
-  for (const script of scripts) {
+  const scripts = Array.from(document.querySelectorAll("script"));
+  const rscScriptCount = scripts.filter((script) => {
     const content = script.textContent || "";
-    if (
+    return (
       content.includes("self.__next_f.push") ||
       content.includes("__next_f.push")
-    ) {
-      rscScriptCount++;
-    }
-  }
+    );
+  }).length;
 
   if (rscScriptCount > 0) {
     indicators.push(`__next_f.push scripts found (${rscScriptCount})`);
@@ -174,14 +170,33 @@ export const detectRouter = (): DetectionResult => {
 };
 
 /**
- * 재시도 로직이 포함된 라우터 감지
+ * 지수 백오프 대기 시간 계산
+ * @param attempt 현재 시도 횟수 (0-indexed)
+ * @param baseDelay 기본 대기 시간 (ms)
+ * @param maxDelay 최대 대기 시간 (ms)
+ * @returns 대기 시간 (ms)
+ */
+const getExponentialBackoffDelay = (
+  attempt: number,
+  baseDelay: number,
+  maxDelay: number = 5000
+): number => {
+  // 2^attempt * baseDelay (최대 maxDelay까지)
+  const delay = Math.min(Math.pow(2, attempt) * baseDelay, maxDelay);
+  // 약간의 jitter 추가 (0-10%)
+  const jitter = delay * 0.1 * Math.random();
+  return Math.round(delay + jitter);
+};
+
+/**
+ * 재시도 로직이 포함된 라우터 감지 (지수 백오프 적용)
  * SPA나 지연 로딩 페이지용
  * @param maxAttempts 최대 시도 횟수 (기본: 3)
- * @param delayMs 재시도 간 대기 시간 (기본: 500ms)
+ * @param baseDelayMs 기본 대기 시간 (기본: 300ms)
  */
 export const detectRouterWithRetry = async (
   maxAttempts = 3,
-  delayMs = 500
+  baseDelayMs = 300
 ): Promise<DetectionResult> => {
   for (let attempt = 0; attempt < maxAttempts; attempt++) {
     const result = detectRouter();
@@ -191,9 +206,10 @@ export const detectRouterWithRetry = async (
       return result;
     }
 
-    // 마지막 시도가 아니면 대기 후 재시도
+    // 마지막 시도가 아니면 지수 백오프로 대기 후 재시도
     if (attempt < maxAttempts - 1) {
-      await new Promise((resolve) => setTimeout(resolve, delayMs));
+      const delay = getExponentialBackoffDelay(attempt, baseDelayMs);
+      await new Promise((resolve) => setTimeout(resolve, delay));
     }
   }
 
