@@ -35,6 +35,47 @@
   --noise: 0;
 }
 
+/* =============================================================================
+   DevTools Panel Design Tokens
+   OKLCH-based color system for consistent UI
+   ============================================================================= */
+
+:root {
+  /* Background colors */
+  --devtools-bg-primary: oklch(14% 0 0);
+  --devtools-bg-secondary: oklch(18% 0 0);
+  --devtools-bg-tertiary: oklch(22% 0 0);
+  --devtools-bg-hover: oklch(26% 0 0 / 0.5);
+  --devtools-bg-selected: oklch(48% 0.243 264.376 / 0.2);
+
+  /* Text colors */
+  --devtools-text-primary: oklch(98% 0 0);
+  --devtools-text-secondary: oklch(80% 0 0);
+  --devtools-text-muted: oklch(60% 0 0);
+  --devtools-text-disabled: oklch(45% 0 0);
+
+  /* Border colors */
+  --devtools-border-subtle: oklch(30% 0 0);
+  --devtools-border-default: oklch(35% 0 0);
+  --devtools-border-strong: oklch(45% 0 0);
+
+  /* Accent colors for JSON tree / syntax highlighting */
+  --devtools-accent-blue: oklch(70% 0.15 240);
+  --devtools-accent-green: oklch(70% 0.15 145);
+  --devtools-accent-orange: oklch(70% 0.15 50);
+  --devtools-accent-purple: oklch(70% 0.15 300);
+  --devtools-accent-red: oklch(65% 0.2 25);
+
+  /* Badge colors */
+  --devtools-badge-props: oklch(70% 0.15 240);
+  --devtools-badge-rsc: oklch(70% 0.15 145);
+  --devtools-badge-metadata: oklch(70% 0.15 50);
+  --devtools-badge-build: oklch(70% 0.15 300);
+
+  /* Interactive states */
+  --devtools-focus-ring: oklch(60% 0.2 240 / 0.5);
+}
+
 @layer base {
   * {
     margin: 0;
@@ -45,6 +86,8 @@
   body {
     font-size: 12px;
     overflow: hidden;
+    background: var(--devtools-bg-primary);
+    color: var(--devtools-text-primary);
   }
 
   /* Scrollbar Styling */
@@ -54,15 +97,153 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: var(--color-base-100);
+    background: var(--devtools-bg-primary);
   }
 
   ::-webkit-scrollbar-thumb {
-    background: var(--color-base-300);
+    background: var(--devtools-border-default);
     border-radius: 4px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: oklch(98% 0 0 / 0.3);
+    background: var(--devtools-border-strong);
+  }
+
+  /* Focus visible outline */
+  :focus-visible {
+    outline: 2px solid var(--devtools-focus-ring);
+    outline-offset: 2px;
+  }
+}
+
+/* =============================================================================
+   Utility Classes
+   ============================================================================= */
+
+@layer utilities {
+  /* Background utilities */
+  .bg-devtools-primary {
+    background: var(--devtools-bg-primary);
+  }
+  .bg-devtools-secondary {
+    background: var(--devtools-bg-secondary);
+  }
+  .bg-devtools-tertiary {
+    background: var(--devtools-bg-tertiary);
+  }
+  .bg-devtools-hover {
+    background: var(--devtools-bg-hover);
+  }
+  .bg-devtools-selected {
+    background: var(--devtools-bg-selected);
+  }
+
+  /* Text utilities */
+  .text-devtools-primary {
+    color: var(--devtools-text-primary);
+  }
+  .text-devtools-secondary {
+    color: var(--devtools-text-secondary);
+  }
+  .text-devtools-muted {
+    color: var(--devtools-text-muted);
+  }
+  .text-devtools-disabled {
+    color: var(--devtools-text-disabled);
+  }
+
+  /* Accent text utilities */
+  .text-devtools-accent-blue {
+    color: var(--devtools-accent-blue);
+  }
+  .text-devtools-accent-green {
+    color: var(--devtools-accent-green);
+  }
+  .text-devtools-accent-orange {
+    color: var(--devtools-accent-orange);
+  }
+  .text-devtools-accent-purple {
+    color: var(--devtools-accent-purple);
+  }
+  .text-devtools-accent-red {
+    color: var(--devtools-accent-red);
+  }
+
+  /* Border utilities */
+  .border-devtools-subtle {
+    border-color: var(--devtools-border-subtle);
+  }
+  .border-devtools-default {
+    border-color: var(--devtools-border-default);
+  }
+  .border-devtools-strong {
+    border-color: var(--devtools-border-strong);
+  }
+
+  /* Text size utility for very small text */
+  .text-2xs {
+    font-size: 0.625rem;
+    line-height: 0.875rem;
+  }
+
+  /* Screen reader only - visually hidden but accessible */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+}
+
+/* =============================================================================
+   Component Overrides
+   ============================================================================= */
+
+@layer components {
+  /* Skeleton loading animation */
+  .skeleton-devtools {
+    background: linear-gradient(
+      90deg,
+      var(--devtools-bg-secondary) 25%,
+      var(--devtools-bg-tertiary) 50%,
+      var(--devtools-bg-secondary) 75%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s infinite;
+  }
+
+  @keyframes skeleton-shimmer {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+
+  /* Badge variants for payload types */
+  .badge-props {
+    background: var(--devtools-badge-props);
+    color: var(--devtools-bg-primary);
+  }
+
+  .badge-rsc {
+    background: var(--devtools-badge-rsc);
+    color: var(--devtools-bg-primary);
+  }
+
+  .badge-metadata {
+    background: var(--devtools-badge-metadata);
+    color: var(--devtools-bg-primary);
+  }
+
+  .badge-build {
+    background: var(--devtools-badge-build);
+    color: var(--devtools-bg-primary);
   }
 }

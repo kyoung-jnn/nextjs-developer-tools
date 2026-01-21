@@ -3,41 +3,71 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Payload</title>
+    <title>Next.js Developer Tools - Payload Inspector</title>
   </head>
-  <body class="bg-base-100">
-    <div id="app" class="flex h-screen flex-col">
+  <body class="bg-devtools-primary">
+    <div
+      id="app"
+      class="flex h-screen flex-col"
+      role="application"
+      aria-label="Next.js Payload Inspector"
+    >
       <!-- Header with filter bar -->
       <header
-        class="navbar bg-base-200 border-base-300 min-h-0 border-b px-2 py-1"
+        class="navbar bg-devtools-secondary border-devtools-subtle min-h-0 border-b px-2 py-1"
+        role="toolbar"
+        aria-label="Filter toolbar"
       >
-        <div id="filter-bar" class="w-full">
+        <div
+          id="filter-bar"
+          class="w-full"
+          role="search"
+          aria-label="Payload filters"
+        >
           <!-- FilterBar component will be mounted here -->
         </div>
       </header>
 
       <!-- Main content area with split panes -->
-      <main class="flex flex-1 overflow-hidden">
+      <main class="flex flex-1 overflow-hidden" role="main">
         <!-- Left pane: Payload list -->
         <section
-          class="border-base-300 relative min-w-[300px] flex-1 overflow-hidden border-r"
+          class="payload-list-section border-devtools-subtle relative min-w-[300px] flex-1 overflow-hidden border-r"
+          aria-label="Payload list"
         >
-          <div id="payload-list" class="h-full">
+          <div
+            id="payload-list"
+            class="h-full"
+            role="listbox"
+            aria-label="Captured payloads"
+          >
             <!-- PayloadList component will be mounted here -->
           </div>
         </section>
 
         <!-- Right pane: Detail panel -->
-        <section class="min-w-[300px] flex-1 overflow-hidden">
-          <div id="detail-panel" class="h-full">
+        <section
+          class="min-w-[300px] flex-1 overflow-hidden"
+          aria-label="Payload details"
+        >
+          <div
+            id="detail-panel"
+            class="h-full"
+            role="region"
+            aria-label="Selected payload details"
+          >
             <!-- DetailPanel component will be mounted here -->
           </div>
         </section>
       </main>
 
       <!-- Status bar -->
-      <footer class="bg-base-200 border-base-300 border-t px-3 py-1">
-        <div id="status-bar" class="text-base-content/60 text-xs">
+      <footer
+        class="bg-devtools-secondary border-devtools-subtle border-t px-3 py-1"
+        role="status"
+        aria-live="polite"
+      >
+        <div id="status-bar" class="text-devtools-muted text-xs">
           <span class="status-text">Ready</span>
         </div>
       </footer>
