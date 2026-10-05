@@ -57,7 +57,8 @@ packages/flight-parser/ Pure TypeScript Flight parser with no external dependenc
 | `pnpm demo` / `pnpm demo:prod` | Development / production demo |
 | `pnpm lint` / `pnpm lint:fix` | Check / fix with Biome |
 | `pnpm typecheck` | Typecheck all packages |
-| `pnpm test` | Parser, runtime, and panel state Vitest tests |
+| `pnpm test` | Vitest unit tests + release/packaging script tests |
+| `pnpm package` | Build and zip the extension → `artifacts/nextjs-developer-tools-vX.Y.Z.zip` (no source maps) |
 | `pnpm test:e2e` | Preview build + prod/dev demos + Chromium E2E |
 | `pnpm icons` | Generate PNG icons |
 
@@ -115,6 +116,16 @@ Open **⚙ Settings** in the panel to choose a theme, density, timestamp format,
 See the [settings E2E tests](apps/extension/tests/e2e/settings.spec.ts).
 
 ![Panel settings drawer](apps/extension/tests/fixtures/preview/settings.png)
+
+## Releasing
+
+The product version is the root `package.json` `version` (SemVer). The build stamps it into the extension manifest: Chrome's `version` gets `X.Y.Z`, and a prerelease such as `1.2.0-beta.1` also goes into `version_name`. Workspace packages are internal and stay at `0.0.0`.
+
+1. Update `version` in the root `package.json`.
+2. Add a section to [CHANGELOG.md](CHANGELOG.md).
+3. Commit as `release: prepare vX.Y.Z` and push or merge to `main`.
+
+On every push to `main`, the Release workflow runs lint, typecheck and tests, then packages the extension. If tag `vX.Y.Z` does not exist yet, it creates the tag and a GitHub Release with generated notes and the installable zip attached. Prereleases are marked as such. A push without a version bump releases nothing.
 
 ## How capture works
 
