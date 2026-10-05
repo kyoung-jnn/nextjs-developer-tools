@@ -12,7 +12,8 @@
     "typecheck": "pnpm -r typecheck",
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
-    "test": "pnpm -r test",
+    "test": "pnpm -r test && node --test \"scripts/tests/*.test.mjs\"",
+    "package": "bash scripts/package-extension.sh",
     "icons": "pnpm --filter @nextjs-devtools/extension icons",
     "test:e2e": "pnpm --filter @nextjs-devtools/extension test:e2e"
   },
