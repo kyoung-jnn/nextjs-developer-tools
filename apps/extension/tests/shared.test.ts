@@ -96,7 +96,10 @@ describe('Toolbar action state (no badge text)', () => {
 });
 it('round trips a large byte array without argument-stack overflow', () => {
   const bytes = Uint8Array.from({ length: 2 * 1024 * 1024 + 7 }, (_, i) => i % 256);
-  expect(base64ToBytes(bytesToBase64(bytes))).toEqual(bytes);
+  const roundTrip = base64ToBytes(bytesToBase64(bytes));
+  // Compare bytes directly: element-wise toEqual on 2 MB takes seconds and timed out in CI.
+  expect(roundTrip.length).toBe(bytes.length);
+  expect(Buffer.compare(Buffer.from(roundTrip), Buffer.from(bytes))).toBe(0);
   expect(base64ToBytes(bytesToBase64(new Uint8Array()))).toEqual(new Uint8Array());
 });
 it('validates debug and metadata messages while rejecting unrelated/malformed messages', () => {
