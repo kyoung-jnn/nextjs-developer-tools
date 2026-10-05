@@ -1,3 +1,4 @@
+import { extensionVersion } from '../shared/settings';
 import { isDetection } from '../shared/validate';
 import { popupContent } from './content';
 import './style.css';
@@ -42,6 +43,10 @@ async function load(): Promise<void> {
 }
 render(null);
 void load().catch(() => {});
+
+const version = document.getElementById('version');
+const current = extensionVersion();
+if (version && current !== 'Preview') version.textContent = `v${current}`;
 
 document.getElementById('settings')?.addEventListener('click', () => {
   void chrome.runtime.openOptionsPage().catch(() => {});

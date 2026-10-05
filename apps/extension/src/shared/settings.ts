@@ -190,7 +190,10 @@ export function formatTime(ms: number, format: Settings['timeFormat'], now = Dat
 export function extensionVersion(): string {
   try {
     return typeof chrome !== 'undefined'
-      ? (chrome.runtime?.getManifest?.().version ?? 'Preview')
+      ? // version_name carries the full SemVer for prereleases (docs/design/12-versioning.md).
+        (chrome.runtime?.getManifest?.().version_name ??
+          chrome.runtime?.getManifest?.().version ??
+          'Preview')
       : 'Preview';
   } catch {
     return 'Preview';

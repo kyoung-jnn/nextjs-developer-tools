@@ -47,7 +47,14 @@ dd {
 
 footer {
   margin-top: 12px;
-  text-align: right;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+footer .version {
+  opacity: 0.6;
+  font-size: 12px;
 }
 footer button {
   border: 0;
