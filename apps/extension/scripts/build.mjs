@@ -1,5 +1,6 @@
-import { cp, rm, writeFile } from 'node:fs/promises';
+import { cp, readFile, rm, writeFile } from 'node:fs/promises';
 import { build, context } from 'esbuild';
+import { rootVersion, withVersion } from './version.mjs';
 
 const watch = process.argv.includes('--watch');
 const preview = process.argv.includes('--preview');
@@ -13,6 +14,15 @@ if (preview)
     'dist/panel-preview.html',
     '<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Payload preview</title><link rel="stylesheet" href="panel-preview.css"></head><body><div id="root"></div><script src="panel-preview.js"></script></body></html>',
   );
+// The product version comes from the root package.json (docs/design/12-versioning.md).
+async function stampManifest() {
+  const manifest = JSON.parse(await readFile('dist/manifest.json', 'utf8'));
+  await writeFile(
+    'dist/manifest.json',
+    `${JSON.stringify(withVersion(manifest, rootVersion()), null, 2)}\n`,
+  );
+}
+await stampManifest();
 const common = {
   bundle: true,
   target: 'chrome120',
@@ -49,6 +59,8 @@ if (watch) {
     cp('public', 'dist', {
       recursive: true,
       filter: (source) => preview || !source.endsWith('panel-preview.html'),
-    }).catch(console.error);
+    })
+      .then(stampManifest)
+      .catch(console.error);
   });
 }
