@@ -1,0 +1,25 @@
+{
+  "name": "nextjs-developer-tools",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Chrome DevTools extension for inspecting Next.js SSR / RSC (Flight) payloads",
+  "scripts": {
+    "build": "pnpm --filter @nextjs-devtools/extension build",
+    "dev": "pnpm --filter @nextjs-devtools/extension dev",
+    "demo": "pnpm --filter @nextjs-devtools/demo dev",
+    "demo:prod": "pnpm --filter @nextjs-devtools/demo build && pnpm --filter @nextjs-devtools/demo start",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "test": "pnpm -r test",
+    "icons": "pnpm --filter @nextjs-devtools/extension icons",
+    "test:e2e": "pnpm --filter @nextjs-devtools/extension test:e2e"
+  },
+  "packageManager": "pnpm@12.9.1",
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.15",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.3"
+  }
+}

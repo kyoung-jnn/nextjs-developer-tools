@@ -1,0 +1,16 @@
+node_modules
+dist
+*.zip
+test-results
+.DS_Store
+docs
+
+apps/*/dist/
+apps/demo/.next/
+**/tsconfig.tsbuildinfo
+
+# Next.js generates these files while running the demo.
+apps/demo/AGENTS.md
+apps/demo/CLAUDE.md
+
+playwright-report
