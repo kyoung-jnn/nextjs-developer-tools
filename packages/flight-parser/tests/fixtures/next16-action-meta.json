@@ -1,0 +1,29 @@
+{
+  "url": "http://localhost:3137/action",
+  "method": "POST",
+  "status": 200,
+  "requestHeaders": {
+    "sec-ch-ua-platform": "\"macOS\"",
+    "next-action": "40e28c083c723205315c3119c98a25317d237ce975",
+    "referer": "http://localhost:3137/action",
+    "sec-ch-ua": "\"HeadlessChrome\";v=\"153\", \"Not_A Brand\";v=\"8\", \"Chromium\";v=\"153\"",
+    "sec-ch-ua-mobile": "?0",
+    "next-router-state-tree": "%5B%22%22%2C%7B%22children%22%3A%5B%22action%22%2C%7B%22children%22%3A%5B%22__PAGE__%22%2C%7B%7D%2Cnull%2Cnull%2C4608%5D%7D%2Cnull%2Cnull%2C4608%5D%7D%2Cnull%2Cnull%2C4624%5D",
+    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+    "accept": "text/x-component",
+    "content-type": "multipart/form-data; boundary=----WebKitFormBoundaryBTmc2oEHem2znbFO"
+  },
+  "responseHeaders": {
+    "transfer-encoding": "chunked",
+    "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+    "x-action-revalidated": "1",
+    "content-encoding": "gzip",
+    "connection": "keep-alive",
+    "keep-alive": "timeout=5",
+    "x-nextjs-cache": "HIT",
+    "x-nextjs-prerender": "1",
+    "date": "Mon, 05 Oct 2026 06:11:47 GMT",
+    "content-type": "text/x-component",
+    "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch, Accept-Encoding"
+  }
+}

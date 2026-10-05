@@ -1,0 +1,194 @@
+:N1791190512111.0127
+3:"$EObject.defineProperty(()=>{ctx.componentMod.preloadStyle(fullHref,ctx.renderOpts.crossOrigin,ctx.nonce)},\"name\",{value:\"\"})"
+2:{"name":"Preloads","key":null,"env":"Server","stack":[],"props":{"preloadCallbacks":["$3"]}}
+4:{"time":0.1529999999993379}
+5:{"time":0.17749999999978172}
+6:[]
+8:[]
+a:[]
+b:[]
+e:I["[project]/node_modules/.pnpm/next@16.3.8_@playwright+test@1.63.0_@types+node@26.6.4_react-dom@19.3.0_react@19.3.0__react@19.3.0/node_modules/next/dist/client/components/layout-router.js [app-client] (ecmascript)",["/_next/static/chunks/12s4_next_dist_0hwxw3d._.js"],"default"]
+11:I["[project]/node_modules/.pnpm/next@16.3.8_@playwright+test@1.63.0_@types+node@26.6.4_react-dom@19.3.0_react@19.3.0__react@19.3.0/node_modules/next/dist/client/components/render-from-template-context.js [app-client] (ecmascript)",["/_next/static/chunks/12s4_next_dist_0hwxw3d._.js"],"default"]
+12:{}
+13:[["Promise.all","",0,0,0,0,true]]
+10:{"children":["$","$L11",null,"$12",null,"$13",1]}
+14:[["Promise.all","",0,0,0,0,true]]
+f:{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$9",null,"$10",null,"$14",0],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$Y","forbidden":"$undefined","unauthorized":"$undefined","segmentViewBoundaries":"$Y"}
+15:[["Promise.all","",0,0,0,0,true]]
+d:{"name":"Layout","key":null,"env":"Server","stack":[],"props":{"children":["$","$Le",null,"$f",null,"$15",1],"params":"$Y"}}
+16:{"time":0.5723749999997381}
+17:[["Layout","/Users/kyoungjin/Github/nextjs-developer-tools/apps/demo/.next/dev/server/chunks/ssr/_0kn1izl._.js",15,463,14,1,false]]
+18:{"time":0.716708999999355}
+19:[["Layout","/Users/kyoungjin/Github/nextjs-developer-tools/apps/demo/.next/dev/server/chunks/ssr/_0kn1izl._.js",17,470,14,1,false]]
+1a:[["Layout","/Users/kyoungjin/Github/nextjs-developer-tools/apps/demo/.next/dev/server/chunks/ssr/_0kn1izl._.js",19,468,14,1,false]]
+1c:{"name":"LinkComponent","key":null,"env":"Server","owner":"$d","stack":[["Layout","/Users/kyoungjin/Github/nextjs-developer-tools/apps/demo/.next/dev/server/chunks/ssr/_0kn1izl._.js",20,482,14,1,false]],"props":{"href":"/","children":"Next.js Payload Demo"}}
+1d:{"time":0.8260419999996884}
+1e:[]
+1f:{"time":0.8655419999995502}
+21:[["Layout","/Users/kyoungjin/Github/nextjs-developer-tools/apps/demo/.next/dev/server/chunks/ssr/_0kn1izl._.js",33,468,14,1,false]]
+22:[["Promise.all","",0,0,0,0,true]]
+24:[["Promise.all","",0,0,0,0,true]]
+26:[]
+28:{"name":"NotFound","key":null,"env":"Server","stack":[],"props":{}}
+29:{"time":1.0390840000000026}
+2a:{"name":"HTTPAccessErrorFallback","key":null,"env":"Server","owner":"$28","stack":[],"props":{"status":404,"message":"This page could not be found."}}
+2b:{"time":1.082499999999527}
+2c:{"time":1.1624169999995502}
+2d:[]
+2e:[]
+2f:[]
+30:[]
+31:[]
+32:[]
+33:[]
+34:[["Promise.all","",0,0,0,0,true]]
+35:[["Promise.all","",0,0,0,0,true]]
+36:[["Promise.all","",0,0,0,0,true]]
+37:[["Promise.all","",0,0,0,0,true],["Promise.all","",0,0,0,0,true]]
+38:[["Promise.all","",0,0,0,0,true],["Promise.all","",0,0,0,0,true]]
+39:[["Promise.all","",0,0,0,0,true],["Promise.all","",0,0,0,0,true]]
+3a:[["Promise.all","",0,0,0,0,true],["Promise.all","",0,0,0,0,true]]
+3c:{"name":"FetchPage","key":null,"env":"Server","stack":[["Promise.all","",0,0,0,0,true],["Promise.all","",0,0,0,0,true]],"props":{"params":"$@3d","searchParams":"$@3e"}}
+3f:{"time":2.3507919999992737}
+40:[["Array.map","",0,0,0,0,false],["Promise.all","",0,0,0,0,true]]
+42:{"name":"Next.MetadataOutlet","key":null,"env":"Server","stack":[["Promise.all","",0,0,0,0,true],["Promise.all","",0,0,0,0,true]],"props":{}}
+43:{"time":3.0691249999999854}
+44:[]
+45:{"time":4.370083999999224}
+47:[]
+4b:[]
+4e:"$EObject.defineProperty(function(type,config,children){for(var propName,i=2;i<arguments.length;i++)validateChildKeys(arguments[i]);i={};var key=null;if(null!=config)for(propName in didWarnAboutOldJSXRuntime||!(\"__self\"in config)||\"key\"in config||(didWarnAboutOldJSXRuntime=!0,console.warn(\"Your app (or one of its dependencies) is using an outdated JSX transform. Update to the modern JSX transform for faster performance: https://react.dev/link/new-jsx-transform\")),hasValidKey(config)&&(checkKeyStringCoercion(config.key),key=\"\"+config.key),config)hasOwnProperty.call(config,propName)&&\"key\"!==propName&&\"__self\"!==propName&&\"__source\"!==propName&&(i[propName]=config[propName]);var childrenLength=arguments.length-2;if(1===childrenLength)i.children=children;else if(1<childrenLength){for(var childArray=Array(childrenLength),_i=0;_i<childrenLength;_i++)childArray[_i]=arguments[_i+2];Object.freeze&&Object.freeze(childArray),i.children=childArray}if(type&&type.defaultProps)for(propName in childrenLength=type.defaultProps)void 0===i[propName]&&(i[propName]=childrenLength[propName]);return key&&function(props,displayName){function warnAboutAccessingKey(){specialPropKeyWarningShown||(specialPropKeyWarningShown=!0,console.error(\"%s: `key` is not a prop. Trying to access it will result in `undefined` being returned. If you need to access the same value within the child component, you should pass it as a different prop. (https://react.dev/link/special-props)\",displayName))}warnAboutAccessingKey.isReactWarning=!0,Object.defineProperty(props,\"key\",{get:warnAboutAccessingKey,configurable:!0})}(i,\"function\"==typeof type?type.displayName||type.name||\"Unknown\":type),(propName=1e4>ReactSharedInternals.recentlyCreatedOwnerStacks++)?(childArray=Error.stackTraceLimit,Error.stackTraceLimit=10,childrenLength=Error(\"react-stack-top-frame\"),Error.stackTraceLimit=childArray):childrenLength=unknownOwnerDebugStack,ReactElement(type,key,i,getOwner(),childrenLength,propName?createTask(getTaskName(type)):unknownOwnerDebugTask)},\"name\",{value:\"\"})"
+4d:{"name":"NonIndex","key":null,"env":"Server","stack":[],"props":{"createElement":"$4e","pagePath":"/fetch","statusCode":200,"isPossibleServerAction":false}}
+4f:{"time":4.738583999999719}
+50:{"time":4.746083999999428}
+52:{"name":"ViewportWrapper","key":null,"env":"Server","stack":[],"props":{}}
+53:{"time":4.790083999999297}
+54:[]
+55:{"time":4.826958999999988}
+58:{"name":"Next.Viewport","key":null,"env":"Server","owner":"$52","stack":[],"props":{}}
+59:{"time":4.8564589999996315}
+5b:{"name":"MetadataWrapper","key":null,"env":"Server","stack":[],"props":{}}
+5c:{"time":5.119708999999602}
+5d:[]
+5e:{"time":5.171708999999282}
+5f:[]
+61:[]
+63:{"name":"Next.Metadata","key":null,"env":"Server","owner":"$5b","stack":[],"props":{}}
+64:{"time":5.277458999999908}
+67:[]
+68:[]
+3d:{}
+3e:
+69:{"time":6.978499999999258}
+6a:[]
+6b:[]
+6c:{"time":7.241291999999703}
+6d:{"time":7.245124999999462}
+6f:[["requestOrigin","/Users/kyoungjin/Github/nextjs-developer-tools/apps/demo/.next/dev/server/chunks/ssr/[root-of-the-server]__1momf2i._.js",258,377,257,1,false],["FetchPage","/Users/kyoungjin/Github/nextjs-developer-tools/apps/demo/.next/dev/server/chunks/ssr/[root-of-the-server]__20yiqe-._.js",59,184,58,1,false]]
+6e:J{"name":"headers","start":2.603041999999732,"end":11.513833999999406,"env":"Server","stack":"$6f","owner":"$3c","value":"$@70"}
+71:{"time":2.6727499999997235}
+72:[["requestOrigin","/Users/kyoungjin/Github/nextjs-developer-tools/apps/demo/.next/dev/server/chunks/ssr/[root-of-the-server]__1momf2i._.js",258,377,257,1,false],["FetchPage","/Users/kyoungjin/Github/nextjs-developer-tools/apps/demo/.next/dev/server/chunks/ssr/[root-of-the-server]__20yiqe-._.js",59,184,58,1,false]]
+73:{"awaited":"$6e","env":"Server","owner":"$3c","stack":"$72"}
+74:{"time":11.514374999999745}
+76:[["FetchPage","/Users/kyoungjin/Github/nextjs-developer-tools/apps/demo/.next/dev/server/chunks/ssr/[root-of-the-server]__20yiqe-._.js",60,28,58,1,false]]
+75:J{"name":"fetch","start":11.603749999999309,"end":12.425874999999905,"env":"Server","stack":"$76","owner":"$3c","value":"$@77"}
+78:{"time":11.758708999999726}
+79:[["FetchPage","/Users/kyoungjin/Github/nextjs-developer-tools/apps/demo/.next/dev/server/chunks/ssr/[root-of-the-server]__20yiqe-._.js",60,28,58,1,false]]
+7a:{"awaited":"$75","env":"Server","owner":"$3c","stack":"$79"}
+7b:{"time":18.74199999999928}
+7d:[["FetchPage","/Users/kyoungjin/Github/nextjs-developer-tools/apps/demo/.next/dev/server/chunks/ssr/[root-of-the-server]__20yiqe-._.js",63,34,58,1,false]]
+7c:J{"name":"_Response.json","start":18.76891699999942,"end":18.98858399999972,"env":"Server","stack":"$7d","owner":"$3c","value":"$@7e"}
+7f:{"time":18.853249999999207}
+80:[["FetchPage","/Users/kyoungjin/Github/nextjs-developer-tools/apps/demo/.next/dev/server/chunks/ssr/[root-of-the-server]__20yiqe-._.js",63,34,58,1,false]]
+81:{"awaited":"$7c","env":"Server","owner":"$3c","stack":"$80"}
+82:{"time":19.030416999999943}
+83:["host","localhost:3151"]
+84:["connection","keep-alive"]
+85:["sec-ch-ua","\"Chromium\";v=\"153\", \"Not_A Brand\";v=\"8\""]
+86:["sec-ch-ua-mobile","?0"]
+87:["sec-ch-ua-platform","\"macOS\""]
+88:["upgrade-insecure-requests","1"]
+89:["user-agent","Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36"]
+8a:["accept","text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"]
+8b:["sec-fetch-site","none"]
+8c:["sec-fetch-mode","navigate"]
+8d:["sec-fetch-user","?1"]
+8e:["sec-fetch-dest","document"]
+8f:["accept-encoding","gzip, deflate, br, zstd"]
+90:["accept-language","ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7"]
+91:["x-forwarded-host","localhost:3151"]
+92:["x-forwarded-port","3151"]
+93:["x-forwarded-proto","http"]
+94:["x-forwarded-for","::1"]
+70:["$83","$84","$85","$86","$87","$88","$89","$8a","$8b","$8c","$8d","$8e","$8f","$90","$91","$92","$93","$94"]
+96:["connection","keep-alive"]
+97:["content-type","application/json"]
+98:["date","Mon, 05 Oct 2026 08:55:12 GMT"]
+99:["keep-alive","timeout=5"]
+9a:["transfer-encoding","chunked"]
+9b:["vary","rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch"]
+95:["$96","$97","$98","$99","$9a","$9b"]
+9d:"$EObject.defineProperty(class ReadableStream {\n  [kType] = 'ReadableStream';\n\n  /**\n   * @param {UnderlyingSource} [source]\n   * @param {QueuingStrategy} [strategy]\n   */\n  constructor(source = kEmptyObject, strategy = kEmptyObject) {\n    markTransferMode(this, false, true);\n    validateObject(source, 'source', kValidateObjectAllowObjects);\n    validateObject(strategy, 'strategy', kValidateObjectAllowObjectsAndNull);\n    this[kState] = createReadableStreamState();\n\n    this[kIsClosedPromise] = PromiseWithResolvers();\n    this[kControllerErrorFunction] = () => {};\n\n    // The spec requires handling of the strategy first\n    // here. Specifically, if getting the size and\n    // highWaterMark from the strategy fail, that has\n    // to trigger a throw before getting the details\n    // from the source. So be sure to keep these in\n    // this order.\n    const size = strategy?.size;\n    const highWaterMark = strategy?.highWaterMark;\n    const type = source.type;\n\n    if (`${type}` === 'bytes') {\n      if (size !== undefined)\n        throw new ERR_INVALID_ARG_VALUE.RangeError('strategy.size', size);\n      setupReadableByteStreamControllerFromSource(\n        this,\n        source,\n        extractHighWaterMark(highWaterMark, 0));\n    } else {\n      if (type !== undefined)\n        throw new ERR_INVALID_ARG_VALUE('source.type', type);\n      setupReadableStreamDefaultControllerFromSource(\n        this,\n        source,\n        extractHighWaterMark(highWaterMark, 1),\n        extractSizeAlgorithm(size));\n    }\n  }\n\n  get [kIsDisturbed]() {\n    return this[kState].disturbed;\n  }\n\n  get [kIsErrored]() {\n    return this[kState].state === 'errored';\n  }\n\n  get [kIsReadable]() {\n    return this[kState].state === 'readable';\n  }\n\n  /**\n   * @readonly\n   * @type {boolean}\n   */\n  get locked() {\n    if (!isReadableStream(this))\n      throw new ERR_INVALID_THIS('ReadableStream');\n    return isReadableStreamLocked(this);\n  }\n\n  static from(iterable) {\n    return readableStreamFromIterable(iterable);\n  }\n\n  /**\n   * @param {any} [reason]\n   * @returns { Promise<void> }\n   */\n  cancel(reason = undefined) {\n    if (!isReadableStream(this))\n      return PromiseReject(new ERR_INVALID_THIS('ReadableStream'));\n    if (isReadableStreamLocked(this)) {\n      return PromiseReject(\n        new ERR_INVALID_STATE.TypeError('ReadableStream is locked'));\n    }\n    return readableStreamCancel(this, reason);\n  }\n\n  /**\n   * @param {{\n   *   mode? : \"byob\"\n   * }} [options]\n   * @returns {ReadableStreamReader}\n   */\n  getReader(options = kEmptyObject) {\n    if (!isReadableStream(this))\n      throw new ERR_INVALID_THIS('ReadableStream');\n    validateObject(options, 'options', kValidateObjectAllowObjectsAndNull);\n    const mode = options?.mode;\n\n    if (mode === undefined)\n      // eslint-disable-next-line no-use-before-define\n      return new ReadableStreamDefaultReader(this);\n\n    if (`${mode}` !== 'byob')\n      throw new ERR_INVALID_ARG_VALUE('options.mode', mode);\n    // eslint-disable-next-line no-use-before-define\n    return new ReadableStreamBYOBReader(this);\n  }\n\n  /**\n   * @param {ReadableWritablePair} transform\n   * @param {StreamPipeOptions} [options]\n   * @returns {ReadableStream}\n   */\n  pipeThrough(transform, options = kEmptyObject) {\n    if (!isReadableStream(this))\n      throw new ERR_INVALID_THIS('ReadableStream');\n    const readable = transform?.readable;\n    if (!isReadableStream(readable)) {\n      throw new ERR_INVALID_ARG_TYPE(\n        'transform.readable',\n        'ReadableStream',\n        readable);\n    }\n    const writable = transform?.writable;\n    if (!isWritableStream(writable)) {\n      throw new ERR_INVALID_ARG_TYPE(\n        'transform.writable',\n        'WritableStream',\n        writable);\n    }\n\n    // The web platform tests require that these be handled one at a\n    // time and in a specific order. options can be null or undefined.\n    validateObject(options, 'options', kValidateObjectAllowObjectsAndNull);\n    const preventAbort = options?.preventAbort;\n    const preventCancel = options?.preventCancel;\n    const preventClose = options?.preventClose;\n    const signal = options?.signal;\n\n    if (signal !== undefined) {\n      validateAbortSignal(signal, 'options.signal');\n    }\n\n    if (isReadableStreamLocked(this))\n      throw new ERR_INVALID_STATE.TypeError('The ReadableStream is locked');\n    if (isWritableStreamLocked(writable))\n      throw new ERR_INVALID_STATE.TypeError('The WritableStream is locked');\n\n    const promise = readableStreamPipeTo(\n      this,\n      writable,\n      !!preventClose,\n      !!preventAbort,\n      !!preventCancel,\n      signal);\n    setPromiseHandled(promise);\n\n    return readable;\n  }\n\n  /**\n   * @param {WritableStream} destination\n   * @param {StreamPipeOptions} [options]\n   * @returns {Promise<void>}\n   */\n  pipeTo(destination, options = kEmptyObject) {\n    try {\n      if (!isReadableStream(this))\n        throw new ERR_INVALID_THIS('ReadableStream');\n      if (!isWritableStream(destination)) {\n        throw new ERR_INVALID_ARG_TYPE(\n          'transform.writable',\n          'WritableStream',\n          destination);\n      }\n\n      validateObject(options, 'options', kValidateObjectAllowObjectsAndNull);\n      const preventAbort = options?.preventAbort;\n      const preventCancel = options?.preventCancel;\n      const preventClose = options?.preventClose;\n      const signal = options?.signal;\n\n      if (signal !== undefined) {\n        validateAbortSignal(signal, 'options.signal');\n      }\n\n      if (isReadableStreamLocked(this))\n        throw new ERR_INVALID_STATE.TypeError('The ReadableStream is locked');\n      if (isWritableStreamLocked(destination))\n        throw new ERR_INVALID_STATE.TypeError('The WritableStream is locked');\n\n      return readableStreamPipeTo(\n        this,\n        destination,\n        !!preventClose,\n        !!preventAbort,\n        !!preventCancel,\n        signal);\n    } catch (error) {\n      return PromiseReject(error);\n    }\n  }\n\n  /**\n   * @returns {ReadableStream[]}\n   */\n  tee() {\n    if (!isReadableStream(this))\n      throw new ERR_INVALID_THIS('ReadableStream');\n    return readableStreamTee(this, false);\n  }\n\n  /**\n   * @param {{\n   *   preventCancel? : boolean,\n   * }} [options]\n   * @returns {AsyncIterable}\n   */\n  values(options = kEmptyObject) {\n    if (!isReadableStream(this))\n      throw new ERR_INVALID_THIS('ReadableStream');\n    validateObject(options, 'options', kValidateObjectAllowObjectsAndNull);\n    const preventCancel = !!(options?.preventCancel);\n\n    // eslint-disable-next-line no-use-before-define\n    const reader = new ReadableStreamDefaultReader(this);\n\n    // No __proto__ here to avoid the performance hit.\n    const state = {\n      done: false,\n      current: undefined,\n    };\n    let started = false;\n\n    // The nextSteps function is not an async function in order\n    // to make it more efficient. Because nextSteps explicitly\n    // creates a Promise and returns it in the common case,\n    // making it an async function just causes two additional\n    // unnecessary Promise allocations to occur, which just add\n    // cost.\n    function nextSteps() {\n      if (state.done)\n        return PromiseResolve({ done: true, value: undefined });\n\n      if (reader[kState].stream === undefined) {\n        return PromiseReject(\n          new ERR_INVALID_STATE.TypeError(\n            'The reader is not bound to a ReadableStream'));\n      }\n      const promise = PromiseWithResolvers();\n\n      // eslint-disable-next-line no-use-before-define\n      readableStreamDefaultReaderRead(reader, new ReadableStreamAsyncIteratorReadRequest(reader, state, promise));\n      return promise.promise;\n    }\n\n    async function returnSteps(value) {\n      if (state.done)\n        return { done: true, value }; // eslint-disable-line node-core/avoid-prototype-pollution\n      state.done = true;\n\n      if (reader[kState].stream === undefined) {\n        throw new ERR_INVALID_STATE.TypeError(\n          'The reader is not bound to a ReadableStream');\n      }\n      assert(!reader[kState].readRequests.length);\n      if (!preventCancel) {\n        const result = readableStreamReaderGenericCancel(reader, value);\n        readableStreamReaderGenericRelease(reader);\n        await result;\n        return { done: true, value }; // eslint-disable-line node-core/avoid-prototype-pollution\n      }\n\n      readableStreamReaderGenericRelease(reader);\n      return { done: true, value }; // eslint-disable-line node-core/avoid-prototype-pollution\n    }\n\n    // TODO(@jasnell): Explore whether an async generator\n    // can be used here instead of a custom iterator object.\n    return ObjectSetPrototypeOf({\n      // Changing either of these functions (next or return)\n      // to async functions causes a failure in the streams\n      // Web Platform Tests that check for use of a modified\n      // Promise.prototype.then. Since the await keyword\n      // uses Promise.prototype.then, it is open to prototype\n      // pollution, which causes the test to fail. The other\n      // await uses here do not trigger that failure because\n      // the test that fails does not trigger those code paths.\n      next() {\n        // If this is the first read, delay by one microtask\n        // to ensure that the controller has had an opportunity\n        // to properly start and perform the initial pull.\n        // TODO(@jasnell): The spec doesn't call this out so\n        // need to investigate if it's a bug in our impl or\n        // the spec.\n        if (!started) {\n          state.current = PromiseResolve();\n          started = true;\n        }\n        state.current = state.current !== undefined ?\n          PromisePrototypeThen(state.current, nextSteps, nextSteps) :\n          nextSteps();\n        return state.current;\n      },\n\n      return(error) {\n        started = true;\n        state.current = state.current !== undefined ?\n          PromisePrototypeThen(\n            state.current,\n            () => returnSteps(error),\n            () => returnSteps(error)) :\n          returnSteps(error);\n        return state.current;\n      },\n\n      [SymbolAsyncIterator]() { return this; },\n    }, AsyncIterator);\n  }\n\n  [kInspect](depth, options) {\n    return customInspect(depth, options, this[kType], {\n      locked: this.locked,\n      state: this[kState].state,\n      supportsBYOB:\n        // eslint-disable-next-line no-use-before-define\n        this[kState].controller instanceof ReadableByteStreamController,\n    });\n  }\n\n  [kTransfer]() {\n    if (!isReadableStream(this))\n      throw new ERR_INVALID_THIS('ReadableStream');\n    if (this.locked) {\n      this[kState].transfer.port1?.close();\n      this[kState].transfer.port1 = undefined;\n      this[kState].transfer.port2 = undefined;\n      throw new DOMException(\n        'Cannot transfer a locked ReadableStream',\n        'DataCloneError');\n    }\n\n    const {\n      writable,\n      promise,\n    } = lazyTransfer().newCrossRealmWritableSink(\n      this,\n      this[kState].transfer.port1);\n\n    this[kState].transfer.writable = writable;\n    this[kState].transfer.promise = promise;\n\n    return {\n      data: { port: this[kState].transfer.port2 },\n      deserializeInfo:\n        'internal/webstreams/readablestream:TransferredReadableStream',\n    };\n  }\n\n  [kTransferList]() {\n    const { port1, port2 } = new MessageChannel();\n    this[kState].transfer.port1 = port1;\n    this[kState].transfer.port2 = port2;\n    return [ port2 ];\n  }\n\n  [kDeserialize]({ port }) {\n    const transfer = lazyTransfer();\n    setupReadableStreamDefaultControllerFromSource(\n      this,\n      // The MessagePort is set to be referenced when reading.\n      // After two MessagePorts are closed, there is a problem with\n      // lingering promise not being properly resolved.\n      // https://github.com/nodejs/node/issues/51486\n      new transfer.CrossRealmTransformReadableSource(port, true),\n      0, () => 1);\n  }\n},\"name\",{value:\"ReadableStream\"})"
+9c:{"constructor":"$9d","locked":true,"":"$P9d"}
+9f:"$EObject.defineProperty(class _Response {\n      static {\n        __name(this, \"Response\");\n      }\n      /** @type {Headers} */\n      #headers;\n      #state;\n      // Creates network error Response.\n      static error() {\n        const responseObject = fromInnerResponse(makeNetworkError(), \"immutable\");\n        return responseObject;\n      }\n      // https://fetch.spec.whatwg.org/#dom-response-json\n      static json(data, init = void 0) {\n        webidl.argumentLengthCheck(arguments, 1, \"Response.json\");\n        if (init !== null) {\n          init = webidl.converters.ResponseInit(init);\n        }\n        const bytes = textEncoder.encode(\n          serializeJavascriptValueToJSONString(data)\n        );\n        const body = extractBody(bytes);\n        const responseObject = fromInnerResponse(makeResponse({}), \"response\");\n        initializeResponse(responseObject, init, { body: body[0], type: \"application/json\" });\n        return responseObject;\n      }\n      // Creates a redirect Response that redirects to url with status status.\n      static redirect(url, status = 302) {\n        webidl.argumentLengthCheck(arguments, 1, \"Response.redirect\");\n        url = webidl.converters.USVString(url);\n        status = webidl.converters[\"unsigned short\"](status);\n        let parsedURL;\n        try {\n          parsedURL = new URL(url, relevantRealm.settingsObject.baseUrl);\n        } catch (err) {\n          throw new TypeError(`Failed to parse URL from ${url}`, { cause: err });\n        }\n        if (!redirectStatusSet.has(status)) {\n          throw new RangeError(`Invalid status code ${status}`);\n        }\n        const responseObject = fromInnerResponse(makeResponse({}), \"immutable\");\n        responseObject.#state.status = status;\n        const value = isomorphicEncode(URLSerializer(parsedURL));\n        responseObject.#state.headersList.append(\"location\", value, true);\n        return responseObject;\n      }\n      // https://fetch.spec.whatwg.org/#dom-response\n      constructor(body = null, init = void 0) {\n        webidl.util.markAsUncloneable(this);\n        if (body === kConstruct) {\n          return;\n        }\n        if (body !== null) {\n          body = webidl.converters.BodyInit(body);\n        }\n        init = webidl.converters.ResponseInit(init);\n        this.#state = makeResponse({});\n        this.#headers = new Headers(kConstruct);\n        setHeadersGuard(this.#headers, \"response\");\n        setHeadersList(this.#headers, this.#state.headersList);\n        let bodyWithType = null;\n        if (body != null) {\n          const [extractedBody, type] = extractBody(body);\n          bodyWithType = { body: extractedBody, type };\n        }\n        initializeResponse(this, init, bodyWithType);\n      }\n      // Returns response?s type, e.g., \"cors\".\n      get type() {\n        webidl.brandCheck(this, _Response);\n        return this.#state.type;\n      }\n      // Returns response?s URL, if it has one; otherwise the empty string.\n      get url() {\n        webidl.brandCheck(this, _Response);\n        const urlList = this.#state.urlList;\n        const url = urlList[urlList.length - 1] ?? null;\n        if (url === null) {\n          return \"\";\n        }\n        return URLSerializer(url, true);\n      }\n      // Returns whether response was obtained through a redirect.\n      get redirected() {\n        webidl.brandCheck(this, _Response);\n        return this.#state.urlList.length > 1;\n      }\n      // Returns response?s status.\n      get status() {\n        webidl.brandCheck(this, _Response);\n        return this.#state.status;\n      }\n      // Returns whether response?s status is an ok status.\n      get ok() {\n        webidl.brandCheck(this, _Response);\n        return this.#state.status >= 200 && this.#state.status <= 299;\n      }\n      // Returns response?s status message.\n      get statusText() {\n        webidl.brandCheck(this, _Response);\n        return this.#state.statusText;\n      }\n      // Returns response?s headers as Headers.\n      get headers() {\n        webidl.brandCheck(this, _Response);\n        return this.#headers;\n      }\n      get body() {\n        webidl.brandCheck(this, _Response);\n        return this.#state.body ? this.#state.body.stream : null;\n      }\n      get bodyUsed() {\n        webidl.brandCheck(this, _Response);\n        return !!this.#state.body && util.isDisturbed(this.#state.body.stream);\n      }\n      // Returns a clone of response.\n      clone() {\n        webidl.brandCheck(this, _Response);\n        if (bodyUnusable(this.#state)) {\n          throw webidl.errors.exception({\n            header: \"Response.clone\",\n            message: \"Body has already been consumed.\"\n          });\n        }\n        const clonedResponse = cloneResponse(this.#state);\n        return fromInnerResponse(clonedResponse, getHeadersGuard(this.#headers));\n      }\n      [nodeUtil.inspect.custom](depth, options) {\n        if (options.depth === null) {\n          options.depth = 2;\n        }\n        options.colors ??= true;\n        const properties = {\n          status: this.status,\n          statusText: this.statusText,\n          headers: this.headers,\n          body: this.body,\n          bodyUsed: this.bodyUsed,\n          ok: this.ok,\n          redirected: this.redirected,\n          type: this.type,\n          url: this.url\n        };\n        return `Response ${nodeUtil.formatWithOptions(options, properties)}`;\n      }\n      /**\n       * @param {Response} response\n       */\n      static getResponseHeaders(response) {\n        return response.#headers;\n      }\n      /**\n       * @param {Response} response\n       * @param {Headers} newHeaders\n       */\n      static setResponseHeaders(response, newHeaders) {\n        response.#headers = newHeaders;\n      }\n      /**\n       * @param {Response} response\n       */\n      static getResponseState(response) {\n        return response.#state;\n      }\n      /**\n       * @param {Response} response\n       * @param {any} newState\n       */\n      static setResponseState(response, newState) {\n        response.#state = newState;\n      }\n    },\"name\",{value:\"Response\"})"
+9e:"$9f"
+77:{"url":"http://localhost:3151/api/posts?source=fetch-props","type":"default","redirected":false,"status":200,"ok":true,"statusText":"OK","headers":"$95","body":"$9c","bodyUsed":true,"":"$P9e"}
+7e:{"source":"fetch-props","message":"Hello 👋 — café","posts":[{"id":1,"title":"Server data at the café ☕","author":{"name":"Zoë"},"tags":["SSR","UTF-8"]},{"id":2,"title":"Streaming promises 👋","author":{"name":"Renée"},"tags":["Flight","streaming"]}]}
+a0:{"time":21.878374999999323}
+a1:[["FetchPage","/Users/kyoungjin/Github/nextjs-developer-tools/apps/demo/.next/dev/server/chunks/ssr/[root-of-the-server]__20yiqe-._.js",67,464,58,1,false]]
+a2:[["FetchPage","/Users/kyoungjin/Github/nextjs-developer-tools/apps/demo/.next/dev/server/chunks/ssr/[root-of-the-server]__20yiqe-._.js",74,464,58,1,false]]
+a4:[["FetchPage","/Users/kyoungjin/Github/nextjs-developer-tools/apps/demo/.next/dev/server/chunks/ssr/[root-of-the-server]__20yiqe-._.js",81,464,58,1,false]]
+a5:[["FetchPage","/Users/kyoungjin/Github/nextjs-developer-tools/apps/demo/.next/dev/server/chunks/ssr/[root-of-the-server]__20yiqe-._.js",82,478,58,1,false]]
+a6:[["FetchPage","/Users/kyoungjin/Github/nextjs-developer-tools/apps/demo/.next/dev/server/chunks/ssr/[root-of-the-server]__20yiqe-._.js",89,478,58,1,false]]
+a9:[["FetchPage","/Users/kyoungjin/Github/nextjs-developer-tools/apps/demo/.next/dev/server/chunks/ssr/[root-of-the-server]__20yiqe-._.js",101,464,58,1,false]]
+aa:[["FetchPage","/Users/kyoungjin/Github/nextjs-developer-tools/apps/demo/.next/dev/server/chunks/ssr/[root-of-the-server]__20yiqe-._.js",102,478,58,1,false]]
+ac:{"name":"RenderOnlyPosts","key":null,"env":"Server","owner":"$3c","stack":[["FetchPage","/Users/kyoungjin/Github/nextjs-developer-tools/apps/demo/.next/dev/server/chunks/ssr/[root-of-the-server]__20yiqe-._.js",109,478,58,1,false]],"props":{"origin":"http://localhost:3151"}}
+ad:{"time":22.263166999999157}
+af:[["RenderOnlyPosts","/Users/kyoungjin/Github/nextjs-developer-tools/apps/demo/.next/dev/server/chunks/ssr/[root-of-the-server]__20yiqe-._.js",31,28,30,1,false]]
+ae:J{"name":"fetch","start":22.59820899999977,"end":27.39558399999987,"env":"Server","stack":"$af","owner":"$ac","value":"$@b0"}
+b1:{"time":22.882041999999274}
+b2:[["RenderOnlyPosts","/Users/kyoungjin/Github/nextjs-developer-tools/apps/demo/.next/dev/server/chunks/ssr/[root-of-the-server]__20yiqe-._.js",31,28,30,1,false]]
+b3:{"awaited":"$ae","env":"Server","owner":"$ac","stack":"$b2"}
+b4:{"time":41.672708999999486}
+b6:[["RenderOnlyPosts","/Users/kyoungjin/Github/nextjs-developer-tools/apps/demo/.next/dev/server/chunks/ssr/[root-of-the-server]__20yiqe-._.js",34,33,30,1,false]]
+b5:J{"name":"_Response.json","start":41.7407919999996,"end":42.08129199999985,"env":"Server","stack":"$b6","owner":"$ac","value":"$@b7"}
+b8:{"time":41.87870899999962}
+b9:[["RenderOnlyPosts","/Users/kyoungjin/Github/nextjs-developer-tools/apps/demo/.next/dev/server/chunks/ssr/[root-of-the-server]__20yiqe-._.js",34,33,30,1,false]]
+ba:{"awaited":"$b5","env":"Server","owner":"$ac","stack":"$b9"}
+bb:{"time":42.16924999999992}
+bd:["connection","keep-alive"]
+be:["content-type","application/json"]
+bf:["date","Mon, 05 Oct 2026 08:55:12 GMT"]
+c0:["keep-alive","timeout=5"]
+c1:["transfer-encoding","chunked"]
+c2:["vary","rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch"]
+bc:["$bd","$be","$bf","$c0","$c1","$c2"]
+c3:{"constructor":"$9d","locked":true,"":"$P9d"}
+b0:{"url":"http://localhost:3151/api/posts?source=fetch-render-only","type":"default","redirected":false,"status":200,"ok":true,"statusText":"OK","headers":"$bc","body":"$c3","bodyUsed":true,"":"$P9f"}
+b7:{"source":"fetch-render-only","message":"Hello 👋 — café","posts":[{"id":1,"title":"Server data at the café ☕","author":{"name":"Zoë"},"tags":["SSR","UTF-8"]},{"id":2,"title":"Streaming promises 👋","author":{"name":"Renée"},"tags":["Flight","streaming"]}]}
+c4:[["RenderOnlyPosts","/Users/kyoungjin/Github/nextjs-developer-tools/apps/demo/.next/dev/server/chunks/ssr/[root-of-the-server]__20yiqe-._.js",35,463,30,1,false]]
+c5:{"time":43.70329199999924}
+c6:[["RenderOnlyPosts","/Users/kyoungjin/Github/nextjs-developer-tools/apps/demo/.next/dev/server/chunks/ssr/[root-of-the-server]__20yiqe-._.js",37,464,30,1,false]]
+c7:[["RenderOnlyPosts","/Users/kyoungjin/Github/nextjs-developer-tools/apps/demo/.next/dev/server/chunks/ssr/[root-of-the-server]__20yiqe-._.js",44,464,30,1,false]]
+c9:[["PromisePosts","/Users/kyoungjin/Github/nextjs-developer-tools/apps/demo/.next/dev/server/chunks/ssr/[root-of-the-server]__20yiqe-._.js",24,28,23,1,false],["FetchPage","/Users/kyoungjin/Github/nextjs-developer-tools/apps/demo/.next/dev/server/chunks/ssr/[root-of-the-server]__20yiqe-._.js",64,26,58,1,false]]
+c8:J{"name":"fetch","start":19.159083999999893,"end":21.52283399999942,"env":"Server","stack":"$c9","owner":"$3c","value":"$@ca"}
+cc:[["PromisePosts","/Users/kyoungjin/Github/nextjs-developer-tools/apps/demo/.next/dev/server/chunks/ssr/[root-of-the-server]__20yiqe-._.js",27,33,23,1,false]]
+cb:J{"name":"_Response.json","start":1239.8554999999997,"end":1240.1451669999997,"env":"Server","stack":"$cc","owner":"$3c","value":"$@cd"}
+ce:{"time":1239.9707089999993}
+cf:[["PromisePosts","/Users/kyoungjin/Github/nextjs-developer-tools/apps/demo/.next/dev/server/chunks/ssr/[root-of-the-server]__20yiqe-._.js",27,33,23,1,false]]
+d0:{"awaited":"$cb","env":"Server","owner":"$3c","stack":"$cf"}
+d1:{"time":1240.2169169999997}
+d2:[["FetchPage","/Users/kyoungjin/Github/nextjs-developer-tools/apps/demo/.next/dev/server/chunks/ssr/[root-of-the-server]__20yiqe-._.js",89,478,58,1,false]]
+d3:{"awaited":"$c8","env":"Server","owner":"$3c","stack":"$d2"}
+d4:{"time":1240.2169169999997}
+d6:["connection","keep-alive"]
+d7:["content-type","application/json"]
+d8:["date","Mon, 05 Oct 2026 08:55:13 GMT"]
+d9:["keep-alive","timeout=5"]
+da:["transfer-encoding","chunked"]
+db:["vary","rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch"]
+d5:["$d6","$d7","$d8","$d9","$da","$db"]
+dc:{"constructor":"$9d","locked":true,"":"$P9d"}
+ca:{"url":"http://localhost:3151/api/posts?source=fetch-promise&delay=1200","type":"default","redirected":false,"status":200,"ok":true,"statusText":"OK","headers":"$d5","body":"$dc","bodyUsed":true,"":"$P9f"}
+cd:{"source":"fetch-promise","message":"Hello 👋 — café","posts":[{"id":1,"title":"Server data at the café ☕","author":{"name":"Zoë"},"tags":["SSR","UTF-8"]},{"id":2,"title":"Streaming promises 👋","author":{"name":"Renée"},"tags":["Flight","streaming"]}]}
+dd:{"time":1241.1891669999995}

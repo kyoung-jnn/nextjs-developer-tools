@@ -1,0 +1,64 @@
+2:I["[project]/node_modules/.pnpm/next@16.3.8_@types+node@26.6.4_react-dom@19.3.0_react@19.3.0__react@19.3.0/node_modules/next/dist/next-devtools/userspace/app/segment-explorer-node.js [app-client] (ecmascript)",["/_next/static/chunks/02iy_next_dist_0-ed55c._.js"],"SegmentViewNode"]
+4:"$Sreact.fragment"
+1b:I["[project]/node_modules/.pnpm/next@16.3.8_@types+node@26.6.4_react-dom@19.3.0_react@19.3.0__react@19.3.0/node_modules/next/dist/client/app-dir/link.js [app-client] (ecmascript)",["/_next/static/chunks/02iy_next_dist_0-ed55c._.js"],""]
+1e:I["[project]/node_modules/.pnpm/next@16.3.8_@types+node@26.6.4_react-dom@19.3.0_react@19.3.0__react@19.3.0/node_modules/next/dist/client/components/layout-router.js [app-client] (ecmascript)",["/_next/static/chunks/02iy_next_dist_0-ed55c._.js"],"default"]
+20:I["[project]/node_modules/.pnpm/next@16.3.8_@types+node@26.6.4_react-dom@19.3.0_react@19.3.0__react@19.3.0/node_modules/next/dist/client/components/render-from-template-context.js [app-client] (ecmascript)",["/_next/static/chunks/02iy_next_dist_0-ed55c._.js"],"default"]
+3f:"$Sreact.suspense"
+49:I["[project]/node_modules/.pnpm/next@16.3.8_@types+node@26.6.4_react-dom@19.3.0_react@19.3.0__react@19.3.0/node_modules/next/dist/lib/framework/boundary-components.js [app-client] (ecmascript)",["/_next/static/chunks/02iy_next_dist_0-ed55c._.js"],"OutletBoundary"]
+58:I["[project]/node_modules/.pnpm/next@16.3.8_@types+node@26.6.4_react-dom@19.3.0_react@19.3.0__react@19.3.0/node_modules/next/dist/lib/framework/boundary-components.js [app-client] (ecmascript)",["/_next/static/chunks/02iy_next_dist_0-ed55c._.js"],"ViewportBoundary"]
+62:I["[project]/node_modules/.pnpm/next@16.3.8_@types+node@26.6.4_react-dom@19.3.0_react@19.3.0__react@19.3.0/node_modules/next/dist/lib/framework/boundary-components.js [app-client] (ecmascript)",["/_next/static/chunks/02iy_next_dist_0-ed55c._.js"],"MetadataBoundary"]
+:HL["/_next/static/chunks/apps_demo_app_globals_1830elw.css","style"]
+7:D"$11"
+7:D"$8"
+7:D"$13"
+16:D"$18"
+16:D"$17"
+16:D"$1a"
+16:["$","$L1b",null,{"href":"/","children":"Next.js Payload Demo"},"$17","$19",1]
+22:D"$24"
+22:D"$23"
+22:D"$26"
+22:D"$25"
+22:D"$27"
+22:[["$","title",null,{"children":"404: This page could not be found."},"$25","$28",1],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}},"$25","$2b",1],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404},"$25","$2c",1],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."},"$25","$2e",1]},"$25","$2d",1]]},"$25","$2a",1]},"$25","$29",1]]
+7:["$","html",null,{"lang":"en","children":["$","body",null,{"children":[["$","header",null,{"children":"$16"},"$8","$15",1],["$","main",null,{"children":["$","$L1e",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L20",null,{},null,"$1f",1],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":["$","$L2","c-not-found",{"type":"not-found","pagePath":"__next_builtin__not-found.js","children":["$22",[]]},null,"$21",0],"forbidden":"$undefined","unauthorized":"$undefined","segmentViewBoundaries":[["$","$L2",null,{"type":"boundary:not-found","pagePath":"__next_builtin__not-found.js@boundary"},null,"$2f",1],"$undefined","$undefined",["$","$L2",null,{"type":"boundary:global-error","pagePath":"__next_builtin__global-error.js"},null,"$30",1]]},null,"$1d",1]},"$8","$1c",1]]},"$8","$14",1]},"$8","$12",1]
+36:D"$3a"
+36:D"$37"
+36:D"$3b"
+41:D"$43"
+41:D"$42"
+36:[["$","h1",null,{"children":"Streaming"},"$37","$3c",1],["$","p",null,{"children":"This content renders immediately."},"$37","$3d",1],["$","$3f",null,{"fallback":["$","p",null,{"children":"Waiting one second…"},"$37","$40",0],"children":"$L41"},"$37","$3e",1]]
+44:D"$46"
+44:D"$45"
+44:D"$48"
+44:["$","$L49",null,{"children":["$","$3f",null,{"name":"Next.MetadataOutlet","children":"$@4b"},"$45","$4a",1]},"$45","$47",1]
+4c:X
+4e:D"$51"
+4e:D"$4f"
+4e:D"$52"
+4e:null
+53:D"$55"
+53:D"$54"
+53:D"$57"
+59:D"$5b"
+59:D"$5a"
+53:["$","$L58","sTeqbtxzjDCPnYMfZpFnxv",{"children":"$L59"},"$54","$56",1]
+5c:D"$5e"
+5c:D"$5d"
+5c:D"$60"
+64:D"$66"
+64:D"$65"
+5c:["$","div","sTeqbtxzjDCPnYMfZpFnxm",{"hidden":true,"children":["$","$L62",null,{"children":["$","$3f",null,{"name":"Next.Metadata","children":"$L64"},"$5d","$63",1]},"$5d","$61",1]},"$5d","$5f",1]
+0:{"f":[[["",{"children":["streaming",{"children":["__PAGE__",{},"$undefined","$undefined",4096]},"$undefined","$undefined",4096]},"$undefined","$undefined",4112],[["$","$L2","layout",{"type":"layout","pagePath":"layout.tsx","children":["$","$4","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/apps_demo_app_globals_1830elw.css","precedence":"next_static/chunks/apps_demo_app_globals_1830elw.css","crossOrigin":"$undefined","nonce":"$undefined"},null,"$5",0],["$","script","script-0",{"src":"/_next/static/chunks/02iy_next_dist_0-ed55c._.js","async":true,"nonce":"$undefined"},null,"$6",0]],"$7"]},null,"$3",1]},null,"$1",0],{"children":[["$","$4","c",{"children":[null,["$","$L1e",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L20",null,{},null,"$33",1],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined","segmentViewBoundaries":["$undefined","$undefined","$undefined","$undefined"]},null,"$32",1]]},null,"$31",0],{"children":[["$","$4","c",{"children":[["$","$L2","c-page",{"type":"page","pagePath":"streaming/page.tsx","children":"$36"},null,"$35",1],null,"$44"]},null,"$34",0],{},null,false,null]},null,false,"$4c"]},null,false,null],["$","$4","h",{"children":["$4e","$53","$5c"]},null,"$4d",0],false]],"q":"","i":true,"S":false,"h":null,"r":"$undefined","b":"development"}
+4c:C
+59:D"$67"
+59:[["$","meta","0",{"charSet":"utf-8"},"$45","$68",0],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"},"$45","$69",0]]
+4b:D"$6a"
+4b:null
+64:D"$6b"
+64:[]
+41:D"$71"
+41:D"$73"
+41:D"$74"
+41:D"$76"
+41:["$","p",null,{"children":"Delayed server content: café — 🚀"},"$42","$75",1]

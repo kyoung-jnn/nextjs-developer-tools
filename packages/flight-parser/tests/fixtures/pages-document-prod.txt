@@ -1,0 +1,1 @@
+{"props":{"pageProps":{"time":"2026-10-05T06:11:05.547Z","query":{}},"__N_SSP":true},"page":"/legacy","query":{},"buildId":"lgix9Md8cAnVRJax2AQJj","isFallback":false,"isExperimentalCompile":false,"gssp":true,"scriptLoader":[]}

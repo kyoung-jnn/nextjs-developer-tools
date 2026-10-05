@@ -1,0 +1,55 @@
+{
+  "props": {
+    "pageProps": {
+      "dehydratedState": {
+        "mutations": [],
+        "queries": [
+          {
+            "dehydratedAt": 1791190455103,
+            "state": {
+              "data": {
+                "source": "query-legacy",
+                "message": "Hello 👋 — café",
+                "posts": [
+                  {
+                    "id": 1,
+                    "title": "Server data at the café ☕",
+                    "author": { "name": "Zoë" },
+                    "tags": ["SSR", "UTF-8"]
+                  },
+                  {
+                    "id": 2,
+                    "title": "Streaming promises 👋",
+                    "author": { "name": "Renée" },
+                    "tags": ["Flight", "streaming"]
+                  }
+                ]
+              },
+              "dataUpdateCount": 1,
+              "dataUpdatedAt": 1791190455103,
+              "error": null,
+              "errorUpdateCount": 0,
+              "errorUpdatedAt": 0,
+              "fetchFailureCount": 0,
+              "fetchFailureReason": null,
+              "fetchMeta": null,
+              "isInvalidated": false,
+              "status": "success",
+              "fetchStatus": "idle"
+            },
+            "queryKey": ["posts", "legacy"],
+            "queryHash": "[\"posts\",\"legacy\"]"
+          }
+        ]
+      }
+    },
+    "__N_SSP": true
+  },
+  "page": "/legacy-query",
+  "query": {},
+  "buildId": "gjyNtpFmuqcdjKDKIesX-",
+  "isFallback": false,
+  "isExperimentalCompile": false,
+  "gssp": true,
+  "scriptLoader": []
+}
