@@ -1,0 +1,49 @@
+{
+  "manifest_version": 3,
+  "name": "Next.js Developer Tools",
+  "version": "0.1.0",
+  "minimum_chrome_version": "120",
+  "description": "Inspect Next.js SSR and React Flight payloads.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Next.js DevTools \u2014 Next.js not detected",
+    "default_icon": {
+      "16": "icons/gray-16.png",
+      "32": "icons/gray-32.png",
+      "48": "icons/gray-48.png",
+      "128": "icons/gray-128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "devtools_page": "devtools.html",
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["hook.js"],
+      "world": "MAIN",
+      "run_at": "document_start",
+      "all_frames": false
+    },
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["bridge.js"],
+      "world": "ISOLATED",
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ],
+  "permissions": ["storage"],
+  "icons": {
+    "16": "icons/black-16.png",
+    "32": "icons/black-32.png",
+    "48": "icons/black-48.png",
+    "128": "icons/black-128.png"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  }
+}
