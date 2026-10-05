@@ -1,0 +1,61 @@
+:root {
+  color-scheme: light dark;
+  font-family: system-ui, sans-serif;
+  font-size: 14px;
+  color: #111;
+  background: #fff;
+}
+body {
+  width: 400px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 14px;
+  line-height: 1.5;
+}
+h1 {
+  margin: 0 0 10px;
+  font-size: 14px;
+  font-weight: 700;
+}
+p {
+  margin: 0;
+}
+dl {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 2px 12px;
+  margin: 12px 0 0;
+  color: #666;
+  font-size: 12px;
+}
+dl:empty {
+  display: none;
+}
+dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color: #fff;
+    background: #1f1f1f;
+  }
+  dl {
+    color: #aaa;
+  }
+}
+
+footer {
+  margin-top: 12px;
+  text-align: right;
+}
+footer button {
+  border: 0;
+  padding: 0;
+  background: none;
+  color: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+}

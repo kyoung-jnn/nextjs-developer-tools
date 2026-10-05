@@ -1,0 +1,67 @@
+:root {
+  color-scheme: light;
+  --bg: #fff;
+  --surface: #f5f6f7;
+  --raised: #fff;
+  --text: #24292f;
+  --muted: #69737e;
+  --border: #d8dde3;
+  --selected: #e3effe;
+  --accent: #0869c5;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #202124;
+  --surface: #292a2d;
+  --raised: #252629;
+  --text: #e8eaed;
+  --muted: #9aa0a6;
+  --border: #42454a;
+  --selected: #283f5b;
+  --accent: #8ab4f8;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  min-width: 300px;
+  background: var(--surface);
+  color: var(--text);
+  font:
+    12px / 1.5 system-ui,
+    sans-serif;
+}
+.options-app {
+  max-width: 480px;
+  margin: 24px auto;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+}
+.options-app header {
+  padding: 18px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.options-app h1 {
+  font-size: 18px;
+  margin: 0;
+}
+.options-app header p {
+  color: var(--muted);
+  margin: 4px 0 0;
+}
+.options-loading,
+.settings-error {
+  padding: 16px;
+}
+.settings-error {
+  color: #c33;
+}
+@media (max-width: 500px) {
+  .options-app {
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+  }
+}
